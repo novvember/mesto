@@ -1,0 +1,15 @@
+/* Файл normalize.css */
+@import url(../vendor/normalize.css);
+
+/* Шрифт Inter*/
+@import url(../vendor/fonts/inter-web/inter.css);
+
+/* Блок Page */
+@import url(../blocks/page/page.css);
+
+
+
+
+
+
+
