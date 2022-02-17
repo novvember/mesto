@@ -1,0 +1,6 @@
+.card__image {
+  width: 100%;
+  aspect-ratio: 1; /* Сохраняет "квадратность" картинки даже при другом исходном файле */
+  object-fit: cover;
+  object-position: center;
+}
