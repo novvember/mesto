@@ -1,7 +1,7 @@
 .profile {
-  padding: 40px 0 50px;
+  padding: 42px 0 50px;
   display: flex;
-  gap: 25px;
+  gap: 26px;
   justify-content: space-between;
   align-items: center;
 }

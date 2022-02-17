@@ -3,7 +3,7 @@
   position: relative;
   /* Предельные размеры по макету */
   max-width: 430px;
-  min-height: 330px;
+  min-height: 300px;
   box-sizing: border-box;
   /* Оформление */
   background-color: #fff;
@@ -14,6 +14,6 @@
 
 @media screen and (max-width: 425px) {
   .popup__container {
-    padding: 25px 22px;
+    padding: 25px 22px 25px;
   }
 }
