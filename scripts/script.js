@@ -1,18 +1,63 @@
+// Кнопка редактирования профиля
 let editButton = document.querySelector('.profile__button_type_edit');
-let popupCancelButton = document.querySelector('.popup__cancel-button');
+// Форма изменения профиля в попапе
+let popupForm = document.querySelector('.popup__form');
 
-editButton.addEventListener('click', openPopup);
-popupCancelButton.addEventListener('click', closePopup);
-
+// Открыть попап
 function openPopup () {
   let popup = document.querySelector('.popup');
+
+  // Сбросить значения в попапе до установленных
+  resetPopup ();
+  // Открыть попап
   popup.classList.add('popup_opened');
 }
 
-function closePopup (event) {
+// Закрыть попап
+function closePopup () {
   let popup = document.querySelector('.popup');
-  event.preventDefault();
   popup.classList.remove('popup_opened');
 }
 
+// Сбросить значения полей в попапе на сохраненные
+function resetPopup () {
+  let nameInput = document.querySelector('.popup__input_type_name');
+  let jobInput = document.querySelector('.popup__input_type_job');
 
+  let profileName = document.querySelector('.profile__name');
+  let profileJob = document.querySelector('.profile__job');
+
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+
+// Сохранить значения из попапа в профиль
+function saveProfileInfo () {
+  let nameInput = document.querySelector('.popup__input_type_name');
+  let jobInput = document.querySelector('.popup__input_type_job');
+
+  let profileName = document.querySelector('.profile__name');
+  let profileJob = document.querySelector('.profile__job');
+
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+}
+
+// Закрыть попав С сохранрением информации в профиль
+function closePopupWithSave (evt) {
+  evt.preventDefault();
+  saveProfileInfo ();
+  closePopup ();
+}
+
+// Закрыть попав БЕЗ сохранрениея информации
+function closePopupWithoutSave (evt) {
+  evt.preventDefault();
+  resetPopup ();
+  closePopup ();
+}
+
+// Обработчики событий кнопок
+editButton.addEventListener('click', openPopup);
+popupForm.addEventListener('submit', closePopupWithSave);
+popupForm.addEventListener('reset', closePopupWithoutSave);
