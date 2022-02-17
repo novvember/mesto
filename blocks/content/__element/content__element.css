@@ -1,0 +1,23 @@
+.content__element {
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - 2 * 200px); /* Поля 200px */
+}
+
+@media screen and (max-width: 1024px) {
+  .content__element {
+    width: calc(100% - 2 * 96px); /* Поля 96px */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content__element {
+    width: calc(100% - 2 * 64px); /* Поля 64px */
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .content__element {
+    width: calc(100% - 2 * 19px); /* Поля 19px */
+  }
+}

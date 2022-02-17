@@ -9,7 +9,12 @@
 
 /* Контейнер страницы */
 @import url(../blocks/content/content.css);
+@import url(../blocks/content/__element/content__element.css);
+@import url(../blocks/content/__element/_type/content__element_type_header.css);
 
+/* Header */
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
 
 
 
