@@ -7,6 +7,9 @@
 /* Блок Page */
 @import url(../blocks/page/page.css);
 
+/* Контейнер страницы */
+@import url(../blocks/content/content.css);
+
 
 
 
