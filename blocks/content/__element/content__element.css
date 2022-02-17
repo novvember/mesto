@@ -7,13 +7,13 @@
 
 @media screen and (max-width: 1024px) {
   .content__element {
-    width: calc(100% - 2 * 96px); /* Поля 96px */
+    width: calc(100% - 2 * 72px); /* Поля 72px */
   }
 }
 
 @media screen and (max-width: 768px) {
   .content__element {
-    width: calc(100% - 2 * 64px); /* Поля 64px */
+    width: calc(100% - 2 * 48px); /* Поля 48px */
   }
 }
 
