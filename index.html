@@ -21,18 +21,37 @@
     </header>
 
     <main>
-      <section class="profile content__element">
 
+      <!-- Profile -->
+      <section class="profile content__element">
+        <img
+          src="./images/avatar__cousteau.jpg"
+          alt="Фотография пользователя"
+          class="profile__avatar">
+        <div class="profile__info">
+          <div class="profile__name-block">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__button profile__button_type_edit" aria-label="Редактировать профиль"></button>
+          </div>
+          <p class="profile__job">Исследователь океана</p>
+        </div>
+        <button class="profile__button profile__button_type_add" aria-label="Добавить фотографию"></button>
       </section>
 
-      <section class="cards content__element">
+      <!-- Cards -->
+      <section class="cards content__element" aria-label="Фотографии">
 
       </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer content__element">
       <p class="footer__copyright">© 2022 Дмитрий Калугин</p>
     </footer>
+  </div>
+
+  <div class="popup">
+
   </div>
 
   <script src="./scripts/script.js"></script>

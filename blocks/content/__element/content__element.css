@@ -1,3 +1,4 @@
+/* Центрирование всех секций страницы по центру с полями справа и слева */
 .content__element {
   margin-left: auto;
   margin-right: auto;

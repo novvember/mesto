@@ -1,0 +1,11 @@
+.profile__name-block {
+  display: flex;
+  gap: 18px;
+  align-items: baseline; /* Выравнивание кнопке редактирования по строке текста */
+}
+
+@media screen and (max-width: 425px) {
+  .profile__name-block {
+    gap: 10px;
+  }
+}

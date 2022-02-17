@@ -1,0 +1,22 @@
+.profile__job {
+  margin: 0; /* Сброс стандартного стиля */
+  word-break: break-word; /* Принудительный перенос при слишком длинных словах */
+  /* Параметры шрифта */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.22;
+}
+@media screen and (max-width: 768px) {
+  .profile__job {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__job {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
