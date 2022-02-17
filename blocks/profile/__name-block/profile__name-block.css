@@ -4,8 +4,18 @@
   align-items: baseline; /* Выравнивание кнопке редактирования по строке текста */
 }
 
+@media screen and (max-width: 768px) {
+  .profile__name-block {
+    /* Отступ слева для компенсации кнопки справа при выравинвании по центру */
+    padding-left: calc(24px + 18px);
+  }
+
+}
+
 @media screen and (max-width: 425px) {
   .profile__name-block {
+    /* Отступ слева для компенсации кнопки справа при выравинвании по центру */
+    padding-left: calc(18px + 10px);
     gap: 10px;
   }
 }
