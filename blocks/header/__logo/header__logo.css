@@ -1,8 +1,8 @@
 .header__logo {
-width: 142px;
-height: 33px;
-object-fit: contain;
-object-position: left;
+  width: 142px;
+  height: 33px;
+  object-fit: contain;
+  object-position: left;
 }
 
 @media screen and (max-width: 425px) {

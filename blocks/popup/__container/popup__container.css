@@ -3,13 +3,13 @@
   position: relative;
   /* Предельные размеры по макету */
   max-width: 430px;
-  min-height: 300px;
   box-sizing: border-box;
   /* Оформление */
   background-color: #fff;
   border-radius: 10px;
   color: #000;
   padding: 34px 36px 37px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .15);
 }
 
 @media screen and (max-width: 425px) {

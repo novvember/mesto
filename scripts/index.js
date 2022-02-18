@@ -2,6 +2,8 @@
 let editButton = document.querySelector('.profile__button_type_edit');
 // Форма изменения профиля в попапе
 let popupForm = document.querySelector('.popup__form');
+// Кнопка закрытия попапа
+let closePopupButton = document.querySelector('.popup__cancel-button');
 
 // Открыть попап
 function openPopup () {
@@ -51,8 +53,7 @@ function closePopupWithSave (evt) {
 }
 
 // Закрыть попав БЕЗ сохранрениея информации
-function closePopupWithoutSave (evt) {
-  evt.preventDefault();
+function closePopupWithoutSave () {
   resetPopup ();
   closePopup ();
 }
@@ -60,4 +61,4 @@ function closePopupWithoutSave (evt) {
 // Обработчики событий кнопок
 editButton.addEventListener('click', openPopup);
 popupForm.addEventListener('submit', closePopupWithSave);
-popupForm.addEventListener('reset', closePopupWithoutSave);
+closePopupButton.addEventListener('click', closePopupWithoutSave);

@@ -1,4 +1,5 @@
 .popup__save-button {
+  margin-top: 29px;
   /* Размеры */
   width: 100%;
   height: 50px;
@@ -8,7 +9,6 @@
   border-radius: 2px;
   background-color: #000;
   /* Параметры шрифта текста внутри */
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

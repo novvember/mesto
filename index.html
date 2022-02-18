@@ -31,11 +31,11 @@
         <div class="profile__info">
           <div class="profile__name-block">
             <h1 class="profile__name">Сергей Бычков</h1>
-            <button class="profile__button profile__button_type_edit" aria-label="Редактировать профиль"></button>
+            <button type="button" class="profile__button profile__button_type_edit" aria-label="Редактировать профиль"></button>
           </div>
           <p class="profile__job">Фотограф и исследователь городской среды</p>
         </div>
-        <button class="profile__button profile__button_type_add" aria-label="Добавить фотографию"></button>
+        <button type="button" class="profile__button profile__button_type_add" aria-label="Добавить фотографию"></button>
       </section>
 
       <!-- Cards -->
@@ -47,7 +47,7 @@
             class="card__image">
           <div class="card__description">
             <h2 class="card__title">Метро</h2>
-            <button class="card__like-button card__like-button_active" aria-label="Добавить в избранное"></button>
+            <button class="card__like-button" aria-label="Добавить в избранное"></button>
           </div>
         </div>
 
@@ -110,25 +110,27 @@
 
     <!-- Footer -->
     <footer class="footer content__element">
-      <p class="footer__copyright">© 2022 Дмитрий Калугин</p>
+      <p class="footer__copyright">&copy;&nbsp;2022 Дмитрий Калугин</p>
     </footer>
 
     <!-- Popup -->
     <div class="popup">
       <div class="popup__container content__element">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form">
+        <form class="popup__form" name="popupForm">
           <input
           type="text"
           class="popup__input popup__input_type_name"
-          placeholder="Имя">
+          placeholder="Имя"
+          name="name">
           <input
           type="text"
           class="popup__input popup__input_type_job"
-          placeholder="Профессия">
-          <button class="popup__cancel-button" type="reset" aria-label="Закрыть окно"></button>
+          placeholder="Профессия"
+          name="job">
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
+        <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
       </div>
     </div>
   </div>

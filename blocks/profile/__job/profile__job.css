@@ -1,7 +1,6 @@
 .profile__job {
   margin: 0; /* Сброс стандартного стиля */
   /* Параметры шрифта */
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
