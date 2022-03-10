@@ -7,9 +7,13 @@
   width: 100%;
   height: 100%;
   /* Позиционирование внутри элемента по центру */
-  display: none; /* Не показывается по умолчанию */
+  display: flex;
   justify-content: center;
   align-items: center;
   /* Фон */
   background-color: rgba(0, 0, 0, .5);
+  /* Появление при открытии */
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
 }

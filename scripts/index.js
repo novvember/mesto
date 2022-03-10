@@ -188,7 +188,7 @@ function drawCards (...cards) {
 
     // Вставка элемента в DOM
     cardsElement.prepend(cardElement);
-  } )
+  } );
 }
 
 /** Функция реакции нажатия на лайк */
