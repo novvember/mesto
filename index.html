@@ -30,82 +30,35 @@
           class="profile__avatar">
         <div class="profile__info">
           <div class="profile__name-block">
-            <h1 class="profile__name">Сергей Бычков</h1>
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__button profile__button_type_edit" aria-label="Редактировать профиль"></button>
           </div>
-          <p class="profile__job">Фотограф и исследователь городской среды</p>
+          <p class="profile__job">Исследователь океана</p>
         </div>
         <button type="button" class="profile__button profile__button_type_add" aria-label="Добавить фотографию"></button>
       </section>
 
       <!-- Cards -->
       <section class="cards content__element" aria-label="Фотографии">
-        <div class="card">
-          <img
-            src="./images/photo__mosmetro.jpg"
-            alt="Вагон метро"
-            class="card__image">
-          <div class="card__description">
-            <h2 class="card__title">Метро</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
+        <!-- Шаблон карточки для генерации -->
+        <template id="card">
+          <div class="card">
+            <img
+              src="#"
+              alt="#"
+              class="card__image">
+            <div class="card__description">
+              <h2 class="card__title">#</h2>
+              <button
+                type="button"
+                class="card__like-button"
+                aria-label="Добавить в избранное"></button>
+            </div>
           </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./images/photo__sofiya.jpg"
-            alt="Собор и парк вокруг него"
-            class="card__image">
-          <div class="card__description">
-            <h2 class="card__title">Софийский собор</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./images/photo__ukraine-hotel.jpg"
-            alt="Здание ночью"
-            class="card__image">
-          <div class="card__description">
-            <h2 class="card__title">Гостиница Украина</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./images/photo__zinger.jpg"
-            alt="Дом Зингера"
-            class="card__image">
-          <div class="card__description">
-            <h2 class="card__title">Петербург</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./images/photo_hermitage.jpg"
-            alt="Парадный фасад Зимнего дворца"
-            class="card__image">
-          <div class="card__description">
-            <h2 class="card__title">Эрмитаж</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
-
-        <div class="card">
-          <img
-            src="./images/photo__zhivopisniy-most.jpg"
-            alt="Мост через реку"
-            class="card__image">
-          <div class="card__description">
-            <h2 class="card__title">Живописный мост</h2>
-            <button type="button" class="card__like-button" aria-label="Добавить в избранное"></button>
-          </div>
-        </div>
+        </template>
       </section>
+
+
     </main>
 
     <!-- Footer -->
