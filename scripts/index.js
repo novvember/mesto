@@ -33,6 +33,8 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 const newCardButton = document.querySelector('.profile__button_type_add');
+const cardsContainer = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#card').content;
 
 const profileEditPopup = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = profileEditPopup.querySelector('.popup__form');
@@ -51,7 +53,52 @@ const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 
 
-// Функции
+/** Функция добавляет карточку/карточки на страницу
+ *
+ * Аргументы:
+ * - контейнер для вставки,
+ * - один или несколько объектов с карточкой (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
+ *
+ * Ожидаемый формат объекта карточки:
+ * {  name: Строка с именем объекта (заголовок карточки),
+ *    link: Строка с полным адресом изображения   }
+ *
+ * Шаблон карточки для генерации:
+ * блок <template id="cards">
+ */
+function renderCards (container, ...cards) {
+  cards.forEach( card => {
+    container.prepend( getNewCard(card.name, card.link) );
+  });
+}
+
+/** Функция создает из шаблона элемент с новой карточкой и возвращает его */
+ function getNewCard (name, link) {
+  // Создание элемента из шаблона
+  const card = cardTemplate.querySelector('.card').cloneNode(true);
+
+  // Заполнение содержимого
+  card.querySelector('.card__image').src = link;
+  card.querySelector('.card__image').alt = name;
+  card.querySelector('.card__title').textContent = name;
+
+  // Обработчики нажатий
+  card.querySelector('.card__image').addEventListener('click', showImagePopup);
+  card.querySelector('.card__like-button').addEventListener('click', likeCard);
+  card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
+
+  return card;
+}
+
+/** Функция нажатия на лайк */
+function likeCard (event) {
+  event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
+}
+
+/** Функция удаления карточки при нажатии на кнопку */
+function deleteCard (event) {
+  event.target.closest('.card').remove();
+}
 
 /** Функция открывает нужный попап */
 function openPopup (popup) {
@@ -75,15 +122,12 @@ function saveProfileInfo (event) {
 function saveNewCard (event) {
   event.preventDefault();
 
-  console.dir(newCardLink);
-
   const card = {
     name: newCardTitle.value,
     link: newCardLink.value
   };
 
-  drawCards(card);
-
+  renderCards(cardsContainer, card);
   closePopup(event);
   newCardForm.reset();
 }
@@ -97,59 +141,8 @@ function showImagePopup (event) {
   openPopup(imagePopup);
 }
 
-/** Функция генерирует карточки и вставляет их на страницу
- *
- * Ожидаемые аргументы на вход:
- * один или несколько объектов с карточкой через запятую
- * (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
- *
- * Ожидаемый формат объекта карточки:
- * {  name: Строка с именем объекта (заголовок карточки),
- *    link: Строка с полным адресом изображения   }
- *
- * Шаблон карточки для генерации:
- * блок <template id="cards">
- *
- * Результат функции:
- * вставляет сгенерированные карточки на страницу в блок .cards в обратном порядке (то есть вставляет в начало блока)
- */
- function drawCards (...cards) {
-  const cardsElement = document.querySelector('.cards');
-  const cardTemplate = document.querySelector('#card').content;
 
-  cards.forEach( card => {
-    // Создание элемента
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-
-    // Заполнение содержимого
-    cardElement.querySelector('.card__image').src = card.link;
-    cardElement.querySelector('.card__image').alt = card.name;
-    cardElement.querySelector('.card__title').textContent = card.name;
-
-    // Обработчики нажатий
-    cardElement.querySelector('.card__image').addEventListener('click', showImagePopup);
-    cardElement.querySelector('.card__like-button').addEventListener('click', likeCard);
-    cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-
-    // Вставка элемента в DOM
-    cardsElement.prepend(cardElement);
-  } );
-}
-
-/** Функция реакции нажатия на лайк */
-function likeCard (event) {
-  event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
-}
-
-/** Функция удаляет карточку при нажатии на кнопку */
-function deleteCard (event) {
-  event.target.closest('.card').remove();
-}
-
-
-
-
-// Обработчики событий
+/** Обработчки событий */
 profileEditButton.addEventListener('click', function () {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
@@ -165,10 +158,5 @@ newCardForm.addEventListener('submit', saveNewCard);
 popupCloseButtons.forEach( button => button.addEventListener('click', closePopup) );
 
 
-
-
-
-
-
 /** Отобразить исходные карточки при загрузке страницы */
-drawCards( ...initialCards );
+renderCards(cardsContainer, ...initialCards);
