@@ -53,19 +53,14 @@ const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 
 // Функции
 
-/** Функция открывает нужный попап
- *
- * Ожидаемый аргумент:
- * строка с классом нужного попапа, например: '.popup_type_edit-profile'
- */
-function openPopup (popupName) {
-  document.querySelector(popupName).classList.add('popup_opened');
+/** Функция открывает нужный попап */
+function openPopup (popup) {
+  popup.classList.add('popup_opened');
 }
 
 /** Функция закрывает текущий попап */
 function closePopup (event) {
-  const popup = event.target.closest('.popup');
-  popup.classList.remove('popup_opened');
+  event.target.closest('.popup').classList.remove('popup_opened');
 }
 
 /** Функция сохраняет введенные данные и закрывает попап */
@@ -96,7 +91,7 @@ function showImagePopup (event) {
   imagePopupFigure.alt = event.target.alt;
   imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
 
-  openPopup('.popup_type_image');
+  openPopup(imagePopup);
 }
 
 /** Функция генерирует карточки и вставляет их на страницу
@@ -155,12 +150,12 @@ function deleteCard (event) {
 profileEditButton.addEventListener('click', function () {
   profileNameInput.value = profileName.textContent;
   profileJobInput.value = profileJob.textContent;
-  openPopup('.popup_type_edit-profile');
+  openPopup(profileEditPopup);
 });
 profileEditForm.addEventListener('submit', saveProfileInfo);
 
 newCardButton.addEventListener('click', function () {
-  openPopup('.popup_type_add-card');
+  openPopup(newCardPopup);
 });
 newCardForm.addEventListener('submit', saveNewCard);
 
