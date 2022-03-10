@@ -85,8 +85,7 @@ function saveNewCard (event) {
   drawCards(card);
 
   closePopup(event);
-  newCardTitle.value = '';
-  newCardLink.value = '';
+  newCardForm.reset();
 }
 
 /** Функция открывает попап с увеличенной картинкой */
