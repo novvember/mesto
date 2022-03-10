@@ -75,9 +75,13 @@ function saveProfileInfo (event) {
 function saveNewCard (event) {
   event.preventDefault();
 
-  const card = {};
-  card.name = newCardTitle.value;
-  card.link = newCardLink.value;
+  console.dir(newCardLink);
+
+  const card = {
+    name: newCardTitle.value,
+    link: newCardLink.value
+  };
+
   drawCards(card);
 
   closePopup(event);
