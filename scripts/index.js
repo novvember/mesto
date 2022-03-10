@@ -8,9 +8,10 @@
 /** Элементы попапа */
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 
-/** Функция открывает попап
+/** Функция открывает нужный попап
  *
- * Ожидемый аргумент: строка с модификатором нужного попапа, например: '.popup_type_edit-profile'
+ * Ожидаемый аргумент:
+ * строка с классом нужного попапа, например: '.popup_type_edit-profile'
  */
 function openPopup (popupName) {
   document.querySelector(popupName).classList.add('popup_opened');
@@ -42,7 +43,6 @@ const profileEditPopup = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = profileEditPopup.querySelector('.popup__form');
 const profileNameInput = profileEditPopup.querySelector('.popup__input_type_name');
 const profileJobInput = profileEditPopup.querySelector('.popup__input_type_job');
-const profileClosePopupButton = profileEditPopup.querySelector('.popup__cancel-button');
 
 /** Функция сохраняет введенные данные и закрывает попап */
 function saveProfileInfo (event) {
@@ -71,25 +71,30 @@ profileEditForm.addEventListener('submit', saveProfileInfo);
 const newCardButton = document.querySelector('.profile__button_type_add');
 
 /** Элементы попапа для добавления карточки */
-
+const newCardPopup = document.querySelector('.popup_type_add-card');
+const newCardForm = newCardPopup.querySelector('.popup__form');
+const newCardTitle = newCardPopup.querySelector('.popup__input_type_title');
+const newCardLink = newCardPopup.querySelector('.popup__input_type_link');
 
 /** Функция сохраняет введенные данные и закрывает попап */
+function saveNewCard (event) {
+  event.preventDefault();
 
+  const card = {};
+  card.name = newCardTitle.value;
+  card.link = newCardLink.value;
+  drawCards(card);
+
+  closePopup(event);
+  newCardTitle.value = '';
+  newCardLink.value = '';
+}
 
 /** Обработчики нажатий кнопок */
 newCardButton.addEventListener('click', function () {
   openPopup('.popup_type_add-card');
 });
-
-
-
-
-
-
-
-
-
-
+newCardForm.addEventListener('submit', saveNewCard);
 
 
 /**
