@@ -162,6 +162,7 @@ function drawCards (...cards) {
 
     // Обработчики нажатий
     cardElement.querySelector('.card__like-button').addEventListener('click', likeCard);
+    cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
 
     // Вставка элемента в DOM
     cardsElement.prepend(cardElement);
@@ -171,6 +172,11 @@ function drawCards (...cards) {
 /** Функция реакции нажатия на лайк */
 function likeCard (event) {
   event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
+}
+
+/** Функция удаляет карточку при нажатии на кнопку */
+function deleteCard (event) {
+  event.target.closest('.card').remove();
 }
 
 /** Отобразить исходные карточки при загрузке страницы */
