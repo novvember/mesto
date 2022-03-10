@@ -152,14 +152,25 @@ function drawCards (...cards) {
   const cardTemplate = document.querySelector('#card').content;
 
   cards.forEach( card => {
+    // Создание элемента
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
+    // Заполнение содержимого
     cardElement.querySelector('.card__image').src = card.link;
     cardElement.querySelector('.card__image').alt = card.name;
     cardElement.querySelector('.card__title').textContent = card.name;
 
+    // Обработчики нажатий
+    cardElement.querySelector('.card__like-button').addEventListener('click', likeCard);
+
+    // Вставка элемента в DOM
     cardsElement.prepend(cardElement);
   } )
+}
+
+/** Функция реакции нажатия на лайк */
+function likeCard (event) {
+  event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
 }
 
 /** Отобразить исходные карточки при загрузке страницы */
