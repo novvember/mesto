@@ -12,7 +12,8 @@
 }
 
 .popup__input::placeholder {
-  color: lightgray;
+  color: #C4C4C4;
+  font-weight: 400;
 }
 
 /* Акцент про фокусе на поле */

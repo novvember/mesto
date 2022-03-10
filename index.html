@@ -66,26 +66,52 @@
       <p class="footer__copyright">&copy;&nbsp;2022 Дмитрий Калугин</p>
     </footer>
 
-    <!-- Popup -->
-    <div class="popup">
+    <!-- Popups -->
+
+    <!-- Popup: редактировать профиль -->
+    <div class="popup popup_type_edit-profile">
       <div class="popup__container content__element">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm">
           <input
-          type="text"
-          class="popup__input popup__input_type_name"
-          placeholder="Имя"
-          name="name">
+            type="text"
+            class="popup__input popup__input_type_name"
+            placeholder="Имя"
+            name="name">
           <input
-          type="text"
-          class="popup__input popup__input_type_job"
-          placeholder="Профессия"
-          name="job">
+            type="text"
+            class="popup__input popup__input_type_job"
+            placeholder="Профессия"
+            name="job">
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
         <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
       </div>
     </div>
+
+    <!-- Popup: Новое место -->
+    <div class="popup popup_type_add-card">
+      <div class="popup__container content__element">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popupForm">
+          <input
+            type="text"
+            class="popup__input popup__input_type_title"
+            placeholder="Название"
+            name="title">
+          <input
+            type="text"
+            class="popup__input popup__input_type_link"
+            placeholder="Ссылка на картинку"
+            name="link">
+          <button class="popup__save-button" type="submit">Создать</button>
+        </form>
+        <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+      </div>
+    </div>
+
+
+
   </div>
 
   <script src="./scripts/index.js"></script>

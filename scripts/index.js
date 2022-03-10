@@ -1,40 +1,94 @@
-/** Элементы страницы, блок profile */
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__job');
-let editButton = document.querySelector('.profile__button_type_edit');
 
-/** Элементы попапа для редактирования профиля */
-let popup = document.querySelector('.popup');
-let popupForm = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
-let closePopupButton = document.querySelector('.popup__cancel-button');
+/**
+ *
+ * Общие элементы для всех попапов
+ *
+ */
 
+/** Элементы попапа */
+const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 
-/** Функция открывает попап, предварительно установив текущие значения */
-function openPopup () {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  popup.classList.add('popup_opened');
+/** Функция открывает попап
+ *
+ * Ожидемый аргумент: строка с модификатором нужного попапа, например: '.popup_type_edit-profile'
+ */
+function openPopup (popupName) {
+  document.querySelector(popupName).classList.add('popup_opened');
 }
 
-/** Функция закрывает попап */
-function closePopup () {
+/** Функция закрывает текущий попап */
+function closePopup (event) {
+  const popup = event.target.closest('.popup');
   popup.classList.remove('popup_opened');
 }
+
+/** Обработчик нажатия одинаковых кнопок */
+popupCloseButtons.forEach( button => button.addEventListener('click', closePopup) );
+
+
+/**
+ *
+ * Раздел с профилем пользователя
+ *
+ */
+
+/** Элементы страницы, блок profile */
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const profileEditButton = document.querySelector('.profile__button_type_edit');
+
+/** Элементы попапа для редактирования профиля */
+const profileEditPopup = document.querySelector('.popup_type_edit-profile');
+const profileEditForm = profileEditPopup.querySelector('.popup__form');
+const profileNameInput = profileEditPopup.querySelector('.popup__input_type_name');
+const profileJobInput = profileEditPopup.querySelector('.popup__input_type_job');
+const profileClosePopupButton = profileEditPopup.querySelector('.popup__cancel-button');
 
 /** Функция сохраняет введенные данные и закрывает попап */
 function saveProfileInfo (event) {
   event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup ();
+  profileName.textContent = profileNameInput.value;
+  profileJob.textContent = profileJobInput.value;
+  closePopup (event);
 }
 
-/** Обработчики событий для кнопок */
-editButton.addEventListener('click', openPopup);
-popupForm.addEventListener('submit', saveProfileInfo);
-closePopupButton.addEventListener('click', closePopup);
+/** Обработчики нажатий кнопок */
+profileEditButton.addEventListener('click', function () {
+  profileNameInput.value = profileName.textContent;
+  profileJobInput.value = profileJob.textContent;
+  openPopup('.popup_type_edit-profile');
+});
+profileEditForm.addEventListener('submit', saveProfileInfo);
+
+
+/**
+ *
+ * Форма с добавлением карточки
+ *
+ */
+
+/** Элементы страницы */
+const newCardButton = document.querySelector('.profile__button_type_add');
+
+/** Элементы попапа для добавления карточки */
+
+
+/** Функция сохраняет введенные данные и закрывает попап */
+
+
+/** Обработчики нажатий кнопок */
+newCardButton.addEventListener('click', function () {
+  openPopup('.popup_type_add-card');
+});
+
+
+
+
+
+
+
+
+
 
 
 
