@@ -99,6 +99,27 @@ newCardForm.addEventListener('submit', saveNewCard);
 
 /**
  *
+ * Попап с увеличенной картинкой
+ *
+ */
+
+/** Элементы страницы */
+const imagePopup = document.querySelector('.popup_type_image');
+const imagePopupFigure = imagePopup.querySelector('.popup__image');
+const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
+
+/** Функция открывает попап с увеличенной картинкой */
+function showImagePopup (event) {
+  imagePopupFigure.src = event.target.src;
+  imagePopupFigure.alt = event.target.alt;
+  imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
+
+  openPopup('.popup_type_image');
+}
+
+
+/**
+ *
  * Раздел с карточками
  *
  * */
@@ -161,6 +182,7 @@ function drawCards (...cards) {
     cardElement.querySelector('.card__title').textContent = card.name;
 
     // Обработчики нажатий
+    cardElement.querySelector('.card__image').addEventListener('click', showImagePopup);
     cardElement.querySelector('.card__like-button').addEventListener('click', likeCard);
     cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
 
