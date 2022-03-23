@@ -51,6 +51,7 @@ const imagePopupFigure = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
+const popups = document.querySelectorAll('.popup');
 
 
 /** Функция добавляет карточку/карточки на страницу
@@ -103,11 +104,19 @@ function deleteCard (event) {
 /** Функция открывает нужный попап */
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByKey)
 }
 
-/** Функция закрывает текущий попап */
-function closePopup (event) {
-  event.target.closest('.popup').classList.remove('popup_opened');
+/** Функция закрывает нужный попап */
+function closePopup (popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByKey);
+}
+
+/** Обработчик для закрытия попапов по кнопке Esc */
+function closePopupByKey (evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') closePopup(popup);
 }
 
 /** Функция сохраняет введенные данные и закрывает попап */
@@ -115,7 +124,7 @@ function saveProfileInfo (event) {
   event.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileJob.textContent = profileJobInput.value;
-  closePopup (event);
+  closePopup (profileEditPopup);
 }
 
 /** Функция сохраняет введенные данные и закрывает попап */
@@ -128,7 +137,7 @@ function saveNewCard (event) {
   };
 
   renderCards(cardsContainer, card);
-  closePopup(event);
+  closePopup(newCardPopup);
   newCardForm.reset();
 }
 
@@ -145,7 +154,9 @@ function showImagePopup (event) {
 /** Обработчки событий */
 profileEditButton.addEventListener('click', function () {
   profileNameInput.value = profileName.textContent;
+  profileNameInput.dispatchEvent(new Event('input'));
   profileJobInput.value = profileJob.textContent;
+  profileJobInput.dispatchEvent(new Event('input'));
   openPopup(profileEditPopup);
 });
 profileEditForm.addEventListener('submit', saveProfileInfo);
@@ -155,7 +166,16 @@ newCardButton.addEventListener('click', function () {
 });
 newCardForm.addEventListener('submit', saveNewCard);
 
-popupCloseButtons.forEach( button => button.addEventListener('click', closePopup) );
+popupCloseButtons.forEach( button => button.addEventListener('click', evt => {
+  const popup = evt.target.closest('.popup');
+  closePopup(popup);
+}) );
+
+popups.forEach( popup => {
+  popup.addEventListener('click', evt => {
+    if (evt.target === evt.currentTarget) closePopup(evt.target);
+  });
+});
 
 
 /** Отобразить исходные карточки при загрузке страницы */
