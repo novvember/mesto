@@ -115,8 +115,10 @@ function closePopup (popup) {
 
 /** Обработчик для закрытия попапов по кнопке Esc */
 function closePopupByKey (evt) {
-  const popup = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') closePopup(popup);
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 }
 
 /** Функция сохраняет введенные данные и закрывает попап */
