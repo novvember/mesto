@@ -104,13 +104,18 @@ function deleteCard (event) {
 /** Функция открывает нужный попап */
 function openPopup (popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByKey)
+  document.addEventListener('keydown', closePopupByKey);
 }
 
 /** Функция закрывает нужный попап */
 function closePopup (popup) {
+  const submitButtonElement = popup.querySelector('.popup__save-button');
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByKey);
+  if (submitButtonElement) {
+    submitButtonElement.classList.add('popup__save-button_disabled');
+    submitButtonElement.disabled = true;
+  }
 }
 
 /** Обработчик для закрытия попапов по кнопке Esc */
