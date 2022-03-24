@@ -172,7 +172,7 @@ popupCloseButtons.forEach( button => button.addEventListener('click', evt => {
 }) );
 
 popups.forEach( popup => {
-  popup.addEventListener('click', evt => {
+  popup.addEventListener('mousedown', evt => {
     if (evt.target === evt.currentTarget) closePopup(evt.target);
   });
 });
