@@ -56,12 +56,6 @@ const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 const popups = document.querySelectorAll('.popup');
 
 
-
-
-
-
-
-
 /** Функция открывает нужный попап */
 export function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -110,8 +104,6 @@ function saveNewCard (event) {
 }
 
 
-
-
 /** Обработчки событий */
 profileEditButton.addEventListener('click', function () {
   profileNameInput.value = profileName.textContent;
@@ -137,7 +129,6 @@ popups.forEach( popup => {
     if (evt.target === evt.currentTarget) closePopup(evt.target);
   });
 });
-
 
 
 /** Функция добавляет карточку/карточки на страницу
