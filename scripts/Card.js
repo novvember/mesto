@@ -8,50 +8,48 @@ export default class Card {
   }
 
   _getTemplate () {
-    this._element = document
+    const cardTemplate = document
                       .querySelector(this._templateSelector)
                       .content
                       .querySelector('.card')
                       .cloneNode(true);
-    return this._element;
+    return cardTemplate;
   }
 
 
   generateCard () {
-    const card = this._getTemplate();
+    this._element = this._getTemplate();
 
     // Заполнение содержимого
-    card.querySelector('.card__image').src = this._link;
-    card.querySelector('.card__image').alt = this._name;
-    card.querySelector('.card__title').textContent = this._name;
+    const image = this._element.querySelector('.card__image');
+    image.src = this._link;
+    image.alt = this._name;
+    this._element.querySelector('.card__title').textContent = this._name;
 
     // Обработчики нажатий
     this._setEventlisteners();
 
-    return card;
+    return this._element;
   }
 
 
   _setEventlisteners () {
-    this._element.querySelector('.card__image').addEventListener('click', this._showImagePopup);
+    this._element.querySelector('.card__image').addEventListener('click', () => this._showImagePopup() );
     this._element.querySelector('.card__like-button').addEventListener('click', this._likeCard);
     this._element.querySelector('.card__delete-button').addEventListener('click', this._deleteCard);
   }
 
 
   _showImagePopup (event) {
-    imagePopupFigure.src = event.target.src;
-    imagePopupFigure.alt = event.target.alt;
-    imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
+    imagePopupFigure.src = this._link;
+    imagePopupFigure.alt = this._name;
+    imagePopupCaption.textContent = this._name;
     openPopup(imagePopup);
   }
 
 
   _likeCard (event) {
-    event.target
-      .closest('.card__like-button')
-      .classList
-      .toggle('card__like-button_active');
+    event.target.classList.toggle('card__like-button_active');
   }
 
 
@@ -59,5 +57,6 @@ export default class Card {
     event.target
       .closest('.card')
       .remove();
+    this._element = null;
   }
 }
