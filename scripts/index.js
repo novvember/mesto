@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 /** Исходные карточки для загрузки */
 const initialCards = [
@@ -151,6 +152,25 @@ popups.forEach( popup => {
   });
 }
 
-
 /** Отобразить исходные карточки при загрузке страницы */
 renderCards(cardsContainer, ...initialCards);
+
+
+/** Функция запускает валидацию всех форм на странице */
+function validateForms (formClasses) {
+  const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
+  formElements.forEach( (formElement) => {
+    const form = new FormValidator(formClasses, formElement);
+    form.enableValidation();
+  });
+}
+
+/** Запуск валидации форм на странице */
+validateForms({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_visible'
+});
