@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 /** Исходные карточки для загрузки */
 const initialCards = [
   {
@@ -34,7 +36,6 @@ const profileJob = document.querySelector('.profile__job');
 
 const newCardButton = document.querySelector('.profile__button_type_add');
 const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card').content;
 
 const profileEditPopup = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = profileEditPopup.querySelector('.popup__form');
@@ -46,9 +47,7 @@ const newCardForm = newCardPopup.querySelector('.popup__form');
 const newCardTitle = newCardPopup.querySelector('.popup__input_type_title');
 const newCardLink = newCardPopup.querySelector('.popup__input_type_link');
 
-const imagePopup = document.querySelector('.popup_type_image');
-const imagePopupFigure = imagePopup.querySelector('.popup__image');
-const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
+
 
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 const popups = document.querySelectorAll('.popup');
@@ -65,41 +64,19 @@ const popups = document.querySelectorAll('.popup');
  *    link: Строка с полным адресом изображения   }
  *
  * Шаблон карточки для генерации:
- * блок <template id="cards">
+ * блок <template id="card">
  */
-function renderCards (container, ...cards) {
-  cards.forEach( card => {
-    container.prepend( getNewCard(card.name, card.link) );
+ function renderCards (container, ...cards) {
+  cards.forEach(cardData => {
+    const card = new Card(cardData, '#card');
+    container.prepend( card.generateCard() );
   });
 }
 
-/** Функция создает из шаблона элемент с новой карточкой и возвращает его */
- function getNewCard (name, link) {
-  // Создание элемента из шаблона
-  const card = cardTemplate.querySelector('.card').cloneNode(true);
 
-  // Заполнение содержимого
-  card.querySelector('.card__image').src = link;
-  card.querySelector('.card__image').alt = name;
-  card.querySelector('.card__title').textContent = name;
+/** Отобразить исходные карточки при загрузке страницы */
+renderCards(cardsContainer, ...initialCards);
 
-  // Обработчики нажатий
-  card.querySelector('.card__image').addEventListener('click', showImagePopup);
-  card.querySelector('.card__like-button').addEventListener('click', likeCard);
-  card.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-
-  return card;
-}
-
-/** Функция нажатия на лайк */
-function likeCard (event) {
-  event.target.closest('.card__like-button').classList.toggle('card__like-button_active');
-}
-
-/** Функция удаления карточки при нажатии на кнопку */
-function deleteCard (event) {
-  event.target.closest('.card').remove();
-}
 
 /** Функция открывает нужный попап */
 function openPopup (popup) {
@@ -148,14 +125,7 @@ function saveNewCard (event) {
   newCardForm.reset();
 }
 
-/** Функция открывает попап с увеличенной картинкой */
-function showImagePopup (event) {
-  imagePopupFigure.src = event.target.src;
-  imagePopupFigure.alt = event.target.alt;
-  imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
 
-  openPopup(imagePopup);
-}
 
 
 /** Обработчки событий */
@@ -185,5 +155,4 @@ popups.forEach( popup => {
 });
 
 
-/** Отобразить исходные карточки при загрузке страницы */
-renderCards(cardsContainer, ...initialCards);
+
