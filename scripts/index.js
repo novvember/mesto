@@ -82,7 +82,7 @@ function closePopupByKey (evt) {
   }
 }
 
-/** Функция сохраняет введенные данные и закрывает попап */
+/** Функция сохраняет введенные данные (профиль пользователя) и закрывает попап */
 function saveProfileInfo (event) {
   event.preventDefault();
   profileName.textContent = profileNameInput.value;
@@ -90,7 +90,7 @@ function saveProfileInfo (event) {
   closePopup (profileEditPopup);
 }
 
-/** Функция сохраняет введенные данные и закрывает попап */
+/** Функция сохраняет введенные данные (добавление карточки) и закрывает попап */
 function saveNewCard (event) {
   event.preventDefault();
 
@@ -165,7 +165,7 @@ function validateForms (formClasses) {
   });
 }
 
-/** Запуск валидации форм на странице */
+/** Запустить валидацию форм на странице */
 validateForms({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
