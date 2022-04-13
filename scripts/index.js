@@ -47,39 +47,23 @@ const newCardForm = newCardPopup.querySelector('.popup__form');
 const newCardTitle = newCardPopup.querySelector('.popup__input_type_title');
 const newCardLink = newCardPopup.querySelector('.popup__input_type_link');
 
+export const imagePopup = document.querySelector('.popup_type_image');
+export const imagePopupFigure = imagePopup.querySelector('.popup__image');
+export const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 
 
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 const popups = document.querySelectorAll('.popup');
 
 
-/** Функция добавляет карточку/карточки на страницу
- *
- * Аргументы:
- * - контейнер для вставки,
- * - один или несколько объектов с карточкой (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
- *
- * Ожидаемый формат объекта карточки:
- * {  name: Строка с именем объекта (заголовок карточки),
- *    link: Строка с полным адресом изображения   }
- *
- * Шаблон карточки для генерации:
- * блок <template id="card">
- */
- function renderCards (container, ...cards) {
-  cards.forEach(cardData => {
-    const card = new Card(cardData, '#card');
-    container.prepend( card.generateCard() );
-  });
-}
 
 
-/** Отобразить исходные карточки при загрузке страницы */
-renderCards(cardsContainer, ...initialCards);
+
+
 
 
 /** Функция открывает нужный попап */
-function openPopup (popup) {
+export function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByKey);
 }
@@ -156,3 +140,26 @@ popups.forEach( popup => {
 
 
 
+/** Функция добавляет карточку/карточки на страницу
+ *
+ * Аргументы:
+ * - контейнер для вставки,
+ * - один или несколько объектов с карточкой (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
+ *
+ * Ожидаемый формат объекта карточки:
+ * {  name: Строка с именем объекта (заголовок карточки),
+ *    link: Строка с полным адресом изображения   }
+ *
+ * Шаблон карточки для генерации:
+ * блок <template id="card">
+ */
+ function renderCards (container, ...cards) {
+  cards.forEach(cardData => {
+    const card = new Card(cardData, '#card');
+    container.prepend( card.generateCard() );
+  });
+}
+
+
+/** Отобразить исходные карточки при загрузке страницы */
+renderCards(cardsContainer, ...initialCards);

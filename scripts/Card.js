@@ -1,3 +1,5 @@
+import {imagePopup, imagePopupFigure, imagePopupCaption, openPopup} from './index.js';
+
 export default class Card {
   constructor (cardData, templateSelector) {
     this._name = cardData.name;
@@ -38,14 +40,9 @@ export default class Card {
 
 
   _showImagePopup (event) {
-    const imagePopup = document.querySelector('.popup_type_image');
-    const imagePopupFigure = imagePopup.querySelector('.popup__image');
-    const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
-
     imagePopupFigure.src = event.target.src;
     imagePopupFigure.alt = event.target.alt;
     imagePopupCaption.textContent = event.target.closest('.card').querySelector('.card__title').textContent;
-
     openPopup(imagePopup);
   }
 
