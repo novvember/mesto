@@ -36,11 +36,11 @@ export default class Card {
   _setEventlisteners () {
     this._element.querySelector('.card__image').addEventListener('click', () => this._showImagePopup() );
     this._element.querySelector('.card__like-button').addEventListener('click', this._likeCard);
-    this._element.querySelector('.card__delete-button').addEventListener('click', this._deleteCard);
+    this._element.querySelector('.card__delete-button').addEventListener('click', () => this._deleteCard() );
   }
 
 
-  _showImagePopup (event) {
+  _showImagePopup () {
     imagePopupFigure.src = this._link;
     imagePopupFigure.alt = this._name;
     imagePopupCaption.textContent = this._name;
@@ -53,10 +53,8 @@ export default class Card {
   }
 
 
-  _deleteCard (event) {
-    event.target
-      .closest('.card')
-      .remove();
+  _deleteCard () {
+    this._element.remove();
     this._element = null;
   }
 }
