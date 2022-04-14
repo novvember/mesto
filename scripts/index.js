@@ -29,6 +29,8 @@ export const imagePopupCaption = imagePopup.querySelector('.popup__image-caption
 const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
 const popups = document.querySelectorAll('.popup');
 
+const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
+
 
 /** Функция открывает нужный попап */
 export function openPopup (popup) {
@@ -38,13 +40,13 @@ export function openPopup (popup) {
 
 /** Функция закрывает нужный попап */
 function closePopup (popup) {
-  const submitButtonElement = popup.querySelector('.popup__save-button');
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByKey);
-  if (submitButtonElement) {
-    submitButtonElement.classList.add('popup__save-button_disabled');
-    submitButtonElement.disabled = true;
-  }
+  // const submitButtonElement = popup.querySelector('.popup__save-button');
+  // if (submitButtonElement) {
+  //   submitButtonElement.classList.add('popup__save-button_disabled');
+  //   submitButtonElement.disabled = true;
+  // }
 }
 
 /** Обработчик для закрытия попапов по кнопке Esc */
@@ -75,6 +77,7 @@ function saveNewCard (event) {
   renderCards(cardsContainer, card);
   closePopup(newCardPopup);
   newCardForm.reset();
+  formValidators[newCardForm.name].disableButtonState();
 }
 
 
@@ -139,6 +142,7 @@ function validateForms (formClasses) {
   const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
   formElements.forEach( (formElement) => {
     const form = new FormValidator(formClasses, formElement);
+    formValidators[formElement.getAttribute('name')] = form;
     form.enableValidation();
   });
 }
