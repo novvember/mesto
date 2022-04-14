@@ -69,7 +69,7 @@ function saveNewCard (event) {
     link: newCardLink.value
   };
 
-  renderCards(cardsContainer, card);
+  renderCard(cardsContainer, card);
   closePopup(newCardPopup);
   newCardForm.reset();
   formValidators[newCardForm.name].disableButtonState();
@@ -103,23 +103,19 @@ popups.forEach( popup => {
 });
 
 
-/** Функция добавляет карточку/карточки на страницу
+/** Функция добавляет карточку на страницу
  *
  * Аргументы:
  * - контейнер для вставки,
- * - один или несколько объектов с карточкой (при вставке массива с объектами использовать spread-оператор, например: ...arrayOfObjects)
- *
- * Ожидаемый формат объекта карточки:
+ * - объект с карточкой
  * {  name: Строка с именем объекта (заголовок карточки),
  *    link: Строка с полным адресом изображения   }
  *
  * Шаблон карточки для генерации:
  * блок <template id="card">
  */
-function renderCards (container, ...cards) {
-  cards.forEach(cardData => {
-    container.prepend( getCardElement (cardData) );
-  });
+function renderCard (container, cardData) {
+  container.prepend(getCardElement(cardData));
 }
 
 /** Функция создает новый элемент карточки по ее содержанию */
@@ -129,13 +125,13 @@ function getCardElement (cardData) {
 }
 
 /** Отобразить исходные карточки при загрузке страницы */
-renderCards(cardsContainer, ...initialCards);
+initialCards.forEach(card => renderCard (cardsContainer, card));
 
 
 /** Функция запускает валидацию всех форм на странице */
 function validateForms (formClasses) {
   const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
-  formElements.forEach( (formElement) => {
+  formElements.forEach( formElement => {
     const form = new FormValidator(formClasses, formElement);
     formValidators[formElement.getAttribute('name')] = form;
     form.enableValidation();
