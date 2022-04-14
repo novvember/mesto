@@ -42,11 +42,6 @@ export function openPopup (popup) {
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByKey);
-  // const submitButtonElement = popup.querySelector('.popup__save-button');
-  // if (submitButtonElement) {
-  //   submitButtonElement.classList.add('popup__save-button_disabled');
-  //   submitButtonElement.disabled = true;
-  // }
 }
 
 /** Обработчик для закрытия попапов по кнопке Esc */
