@@ -118,11 +118,16 @@ popups.forEach( popup => {
  * Шаблон карточки для генерации:
  * блок <template id="card">
  */
- function renderCards (container, ...cards) {
+function renderCards (container, ...cards) {
   cards.forEach(cardData => {
-    const card = new Card(cardData, '#card');
-    container.prepend( card.generateCard() );
+    container.prepend( getCardElement (cardData) );
   });
+}
+
+/** Функция создает новый элемент карточки по ее содержанию */
+function getCardElement (cardData) {
+  const card = new Card(cardData, '#card');
+  return card.generateCard();
 }
 
 /** Отобразить исходные карточки при загрузке страницы */
