@@ -1,7 +1,7 @@
-import initialCards from './initialCards.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
+import initialCards from '../utils/initialCards.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
 
 
 /** Элементы страницы */
@@ -129,6 +129,8 @@ popups.forEach( popup => {
 // /** Отобразить исходные карточки при загрузке страницы */
 // initialCards.forEach(card => renderCard (cardsContainer, card));
 
+
+// Отображение исходных карточек
 const cardsContainer = new Section({
   items: initialCards,
   renderer: (data) => {
