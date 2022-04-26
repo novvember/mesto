@@ -1,6 +1,7 @@
 import initialCards from './initialCards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 
 /** Элементы страницы */
@@ -9,7 +10,8 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 const newCardButton = document.querySelector('.profile__button_type_add');
-const cardsContainer = document.querySelector('.cards');
+const cardsSelector = '.cards';
+const cardTemplateSelector = '#card';
 
 const profileEditPopup = document.querySelector('.popup_type_edit-profile');
 const profileEditForm = profileEditPopup.querySelector('.popup__form');
@@ -103,29 +105,46 @@ popups.forEach( popup => {
 });
 
 
-/** Функция добавляет карточку на страницу
- *
- * Аргументы:
- * - контейнер для вставки,
- * - объект с карточкой
- * {  name: Строка с именем объекта (заголовок карточки),
- *    link: Строка с полным адресом изображения   }
- *
- * Шаблон карточки для генерации:
- * блок <template id="card">
- */
-function renderCard (container, cardData) {
-  container.prepend(getCardElement(cardData));
-}
+// /** Функция добавляет карточку на страницу
+//  *
+//  * Аргументы:
+//  * - контейнер для вставки,
+//  * - объект с карточкой
+//  * {  name: Строка с именем объекта (заголовок карточки),
+//  *    link: Строка с полным адресом изображения   }
+//  *
+//  * Шаблон карточки для генерации:
+//  * блок <template id="card">
+//  */
+// function renderCard (container, cardData) {
+//   container.prepend(getCardElement(cardData));
+// }
 
-/** Функция создает новый элемент карточки по ее содержанию */
-function getCardElement (cardData) {
-  const card = new Card(cardData, '#card');
-  return card.generateCard();
-}
+// /** Функция создает новый элемент карточки по ее содержанию */
+// function getCardElement (cardData) {
+//   const card = new Card(cardData, '#card');
+//   return card.generateCard();
+// }
 
-/** Отобразить исходные карточки при загрузке страницы */
-initialCards.forEach(card => renderCard (cardsContainer, card));
+// /** Отобразить исходные карточки при загрузке страницы */
+// initialCards.forEach(card => renderCard (cardsContainer, card));
+
+const cardsContainer = new Section({
+  items: initialCards,
+  renderer: (data) => {
+    const card = new Card(data, cardTemplateSelector);
+    return card.generateCard();
+  }
+}, cardsSelector);
+
+cardsContainer.renderItems();
+
+
+
+
+
+
+
 
 
 /** Функция запускает валидацию всех форм на странице */
