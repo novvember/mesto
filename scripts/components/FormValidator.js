@@ -1,4 +1,19 @@
 export default class FormValidator {
+  /**
+   * Класс отвечает за валидацию формы, отображение/скрытие ошибок, отображение кнопки отправки
+   *
+   * Параметры:
+   * formClasses - селекторы и классы элементов формы, формат:
+   * {
+   *   formSelector,
+   *   inputSelector,
+   *   submitButtonSelector,
+   *   inactiveButtonClass,
+   *   inputErrorClass,
+   *   errorClass
+   * }
+   * formElement - элемент с валидируемой формой
+   */
   constructor (formClasses, formElement) {
     // Форма
     this._formElement = formElement;
@@ -14,11 +29,9 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
-
   enableValidation () {
       this._setEventListeners();
   }
-
 
   _setEventListeners () {
     this._inputElements.forEach( inputElement => {
@@ -32,7 +45,6 @@ export default class FormValidator {
     this._toggleButtonState();
   }
 
-
   _isValid (inputElement) {
     if (inputElement.validity.valid) {
       this._hideInputError(inputElement);
@@ -41,7 +53,6 @@ export default class FormValidator {
     }
   }
 
-
   _showInputError (inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
@@ -49,14 +60,12 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-
   _hideInputError (inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   }
-
 
   _toggleButtonState () {
     if (this._hasInvalidInput()) {
@@ -66,18 +75,15 @@ export default class FormValidator {
     }
   }
 
-
   disableButtonState () {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
   }
 
-
   _enableButtonState () {
     this._buttonElement.classList.remove(this._inactiveButtonClass);
     this._buttonElement.disabled = false;
   }
-
 
   _hasInvalidInput () {
     return this._inputElements.some( inputElement => inputElement.validity.valid === false);
