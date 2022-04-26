@@ -73,12 +73,14 @@ function saveProfileInfo (event) {
 function saveNewCard (event) {
   event.preventDefault();
 
-  const card = {
+  const cardData = {
     name: newCardTitle.value,
     link: newCardLink.value
   };
 
-  renderCard(cardsContainer, card);
+  const card = new Card(cardData, cardTemplateSelector);
+  cardsContainer.addItem(card.generateCard());
+
   closePopup(newCardPopup);
   newCardForm.reset();
   formValidators[newCardForm.name].disableButtonState();
