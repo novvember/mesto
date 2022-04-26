@@ -1,24 +1,18 @@
-export const cardsSelector = '.cards';
-export const cardTemplateSelector = '#card';
-
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
-export const profileEditButton = document.querySelector('.profile__button_type_edit');
-export const profileEditPopupElement = document.querySelector('.popup_type_edit-profile');
-export const profileNameInput = profileEditPopupElement.querySelector('.popup__input_type_name');
-export const profileJobInput = profileEditPopupElement.querySelector('.popup__input_type_job');
-export const profileEditPopupSelector = '.popup_type_edit-profile';
-
-export const newCardButton = document.querySelector('.profile__button_type_add');
-export const newCardPopupElement = document.querySelector('.popup_type_add-card');
-export const newCardForm = newCardPopupElement.querySelector('.popup__form');
-export const newCardPopupSelector = '.popup_type_add-card';
-
-export const imagePopupSelector = '.popup_type_image';
-
-
 // Импорт данных из других модулей
-import {} from '../utils/constants.js';
+import {
+  cardsSelector,
+  cardTemplateSelector,
+  profileName,
+  profileJob,
+  profileEditButton,
+  profileNameInput,
+  profileJobInput,
+  profileEditPopupSelector,
+  newCardButton,
+  newCardForm,
+  newCardPopupSelector,
+  imagePopupSelector
+} from '../utils/constants.js';
 import initialCards from '../utils/initialCards.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -111,12 +105,3 @@ const userInfo = new UserInfo({
   nameElement: profileName,
   jobElement: profileJob
 });
-
-
-
-
-
-
-
-
-
