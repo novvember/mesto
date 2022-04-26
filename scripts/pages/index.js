@@ -1,35 +1,39 @@
-import initialCards from '../utils/initialCards.js';
-import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';
-import Section from '../components/Section.js';
+import {} from '../utils/constants.js';
 
 
-/** Элементы страницы */
-const profileEditButton = document.querySelector('.profile__button_type_edit');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
+export const profileEditButton = document.querySelector('.profile__button_type_edit');
+export const profileName = document.querySelector('.profile__name');
+export const profileJob = document.querySelector('.profile__job');
 
-const newCardButton = document.querySelector('.profile__button_type_add');
-const cardsSelector = '.cards';
-const cardTemplateSelector = '#card';
+export const newCardButton = document.querySelector('.profile__button_type_add');
+export const cardsSelector = '.cards';
+export const cardTemplateSelector = '#card';
 
-const profileEditPopup = document.querySelector('.popup_type_edit-profile');
-const profileEditForm = profileEditPopup.querySelector('.popup__form');
-const profileNameInput = profileEditPopup.querySelector('.popup__input_type_name');
-const profileJobInput = profileEditPopup.querySelector('.popup__input_type_job');
+export const profileEditPopup = document.querySelector('.popup_type_edit-profile');
+export const profileEditForm = profileEditPopup.querySelector('.popup__form');
+export const profileNameInput = profileEditPopup.querySelector('.popup__input_type_name');
+export const profileJobInput = profileEditPopup.querySelector('.popup__input_type_job');
 
-const newCardPopup = document.querySelector('.popup_type_add-card');
-const newCardForm = newCardPopup.querySelector('.popup__form');
-const newCardTitle = newCardPopup.querySelector('.popup__input_type_title');
-const newCardLink = newCardPopup.querySelector('.popup__input_type_link');
+export const newCardPopup = document.querySelector('.popup_type_add-card');
+export const newCardForm = newCardPopup.querySelector('.popup__form');
+export const newCardTitle = newCardPopup.querySelector('.popup__input_type_title');
+export const newCardLink = newCardPopup.querySelector('.popup__input_type_link');
 
 export const imagePopup = document.querySelector('.popup_type_image');
 export const imagePopupFigure = imagePopup.querySelector('.popup__image');
 export const imagePopupCaption = imagePopup.querySelector('.popup__image-caption');
 
 
-const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
-const popups = document.querySelectorAll('.popup');
+export const popupCloseButtons = document.querySelectorAll('.popup__cancel-button');
+export const popups = document.querySelectorAll('.popup');
+
+
+import initialCards from '../utils/initialCards.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+
+
 
 const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
 
