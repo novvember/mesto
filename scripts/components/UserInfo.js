@@ -1,4 +1,11 @@
 export default class UserInfo {
+  /**
+   * Класс отвечает за получение и изменение информации о пользователе
+   *
+   * Параметры:
+   * nameElement - элемент с именем пользователя
+   * jobElement - элемент с описанием деятельности пользователя
+   */
   constructor({nameElement, jobElement}) {
     this._nameElement = nameElement;
     this._jobElement = jobElement;
