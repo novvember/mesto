@@ -1,6 +1,3 @@
-import {} from '../utils/constants.js';
-
-
 export const profileEditButton = document.querySelector('.profile__button_type_edit');
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
@@ -28,6 +25,12 @@ export const popupCloseButtons = document.querySelectorAll('.popup__cancel-butto
 export const popups = document.querySelectorAll('.popup');
 
 
+
+
+
+
+
+import {} from '../utils/constants.js';
 import initialCards from '../utils/initialCards.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
