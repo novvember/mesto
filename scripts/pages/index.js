@@ -74,7 +74,7 @@ popupEditInfo.setEventListeners();
 
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', data => {
-  const card = new Card(data, cardTemplateSelector);
+  const card = new Card(data, cardTemplateSelector, handleCardClick);
   cardsContainer.addItem(card.generateCard());
   popupAddCard.close();
   formValidators[newCardForm.getAttribute('name')].disableButtonState();
@@ -95,13 +95,16 @@ const popupImage = new PopupWithImage('.popup_type_image');
 popupImage.setEventListeners();
 
 
+function handleCardClick(imageLink, text) {
+  popupImage.open(imageLink, text);
+}
 
 
 // Отображение исходных карточек
 const cardsContainer = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, cardTemplateSelector);
+    const card = new Card(data, cardTemplateSelector, handleCardClick);
     return card.generateCard();
   }
 }, cardsSelector);
