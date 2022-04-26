@@ -2,6 +2,12 @@
 import {
   cardsSelector,
   cardTemplateSelector,
+  formSelector,
+  inputSelector,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass,
   profileName,
   profileJob,
   profileEditButton,
@@ -83,7 +89,7 @@ const formValidators = {};
 
 function validateForms (formClasses) {
   const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
-  formElements.forEach( formElement => {
+  formElements.forEach(formElement => {
     const form = new FormValidator(formClasses, formElement);
     formValidators[formElement.getAttribute('name')] = form;
     form.enableValidation();
@@ -91,12 +97,12 @@ function validateForms (formClasses) {
 }
 
 validateForms({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
+  formSelector,
+  inputSelector,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass
 });
 
 
