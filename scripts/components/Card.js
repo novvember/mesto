@@ -24,7 +24,6 @@ export default class Card {
     return cardTemplate;
   }
 
-
   generateCard () {
     this._element = this._getTemplate();
 
@@ -39,7 +38,6 @@ export default class Card {
 
     return this._element;
   }
-
 
   _setEventlisteners () {
     this._element
@@ -58,7 +56,6 @@ export default class Card {
   _likeCard (event) {
     event.target.classList.toggle('card__like-button_active');
   }
-
 
   _deleteCard () {
     this._element.remove();
