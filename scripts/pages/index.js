@@ -37,29 +37,26 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-
+import UserInfo from '../components/UserInfo.js';
 
 
 const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
 
 
+const userInfo = new UserInfo({
+  nameElement: profileName,
+  jobElement: profileJob
+});
 
 
-// /** Функция сохраняет введенные данные (профиль пользователя) и закрывает попап */
-// function saveProfileInfo (event) {
-//   event.preventDefault();
-//   profileName.textContent = profileNameInput.value;
-//   profileJob.textContent = profileJobInput.value;
-//   closePopup (profileEditPopup);
-// }
 
 
 
 /** Обработчки событий */
 profileEditButton.addEventListener('click', function () {
-  profileNameInput.value = profileName.textContent;
+  profileNameInput.value = userInfo.getUserInfo().name;
+  profileJobInput.value = userInfo.getUserInfo().job;
   profileNameInput.dispatchEvent(new Event('input'));
-  profileJobInput.value = profileJob.textContent;
   profileJobInput.dispatchEvent(new Event('input'));
   popupEditInfo.open();
 });
@@ -69,8 +66,7 @@ profileEditButton.addEventListener('click', function () {
 
 
 const popupEditInfo = new PopupWithForm('.popup_type_edit-profile', data => {
-  profileName.textContent = data.name;
-  profileJob.textContent = data.job;
+  userInfo.setUserInfo(data);
   popupEditInfo.close();
 });
 popupEditInfo.setEventListeners();
