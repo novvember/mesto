@@ -1,5 +1,3 @@
-import {imagePopup, imagePopupFigure, imagePopupCaption, openPopup} from '../pages/index.js';
-
 export default class Card {
   constructor (cardData, templateSelector) {
     this._name = cardData.name;

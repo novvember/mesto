@@ -35,56 +35,24 @@ import initialCards from '../utils/initialCards.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 
 
 const formValidators = {}; // Экземпляры класса FormValidator, чтобы снаружи обращаться к их методам
 
 
-/** Функция открывает нужный попап */
-export function openPopup (popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByKey);
-}
 
-/** Функция закрывает нужный попап */
-function closePopup (popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByKey);
-}
 
-/** Обработчик для закрытия попапов по кнопке Esc */
-function closePopupByKey (evt) {
-  if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
-  }
-}
+// /** Функция сохраняет введенные данные (профиль пользователя) и закрывает попап */
+// function saveProfileInfo (event) {
+//   event.preventDefault();
+//   profileName.textContent = profileNameInput.value;
+//   profileJob.textContent = profileJobInput.value;
+//   closePopup (profileEditPopup);
+// }
 
-/** Функция сохраняет введенные данные (профиль пользователя) и закрывает попап */
-function saveProfileInfo (event) {
-  event.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileJob.textContent = profileJobInput.value;
-  closePopup (profileEditPopup);
-}
-
-/** Функция сохраняет введенные данные (добавление карточки) и закрывает попап */
-function saveNewCard (event) {
-  event.preventDefault();
-
-  const cardData = {
-    name: newCardTitle.value,
-    link: newCardLink.value
-  };
-
-  const card = new Card(cardData, cardTemplateSelector);
-  cardsContainer.addItem(card.generateCard());
-
-  closePopup(newCardPopup);
-  newCardForm.reset();
-  formValidators[newCardForm.name].disableButtonState();
-}
 
 
 /** Обработчки событий */
@@ -93,50 +61,44 @@ profileEditButton.addEventListener('click', function () {
   profileNameInput.dispatchEvent(new Event('input'));
   profileJobInput.value = profileJob.textContent;
   profileJobInput.dispatchEvent(new Event('input'));
-  openPopup(profileEditPopup);
+  popupEditInfo.open();
 });
-profileEditForm.addEventListener('submit', saveProfileInfo);
+
+
+
+
+
+const popupEditInfo = new PopupWithForm('.popup_type_edit-profile', data => {
+  profileName.textContent = data.name;
+  profileJob.textContent = data.job;
+  popupEditInfo.close();
+});
+popupEditInfo.setEventListeners();
+
+
+
+const popupAddCard = new PopupWithForm('.popup_type_add-card', data => {
+  const card = new Card(data, cardTemplateSelector);
+  cardsContainer.addItem(card.generateCard());
+  popupAddCard.close();
+  formValidators[newCardForm.getAttribute('name')].disableButtonState();
+});
+popupAddCard.setEventListeners();
+
+
+
 
 newCardButton.addEventListener('click', function () {
-  openPopup(newCardPopup);
-});
-newCardForm.addEventListener('submit', saveNewCard);
-
-popupCloseButtons.forEach( button => button.addEventListener('click', evt => {
-  const popup = evt.target.closest('.popup');
-  closePopup(popup);
-}) );
-
-popups.forEach( popup => {
-  popup.addEventListener('mousedown', evt => {
-    if (evt.target === evt.currentTarget) closePopup(evt.target);
-  });
+  popupAddCard.open();
 });
 
 
-// /** Функция добавляет карточку на страницу
-//  *
-//  * Аргументы:
-//  * - контейнер для вставки,
-//  * - объект с карточкой
-//  * {  name: Строка с именем объекта (заголовок карточки),
-//  *    link: Строка с полным адресом изображения   }
-//  *
-//  * Шаблон карточки для генерации:
-//  * блок <template id="card">
-//  */
-// function renderCard (container, cardData) {
-//   container.prepend(getCardElement(cardData));
-// }
 
-// /** Функция создает новый элемент карточки по ее содержанию */
-// function getCardElement (cardData) {
-//   const card = new Card(cardData, '#card');
-//   return card.generateCard();
-// }
 
-// /** Отобразить исходные карточки при загрузке страницы */
-// initialCards.forEach(card => renderCard (cardsContainer, card));
+const popupImage = new PopupWithImage('.popup_type_image');
+popupImage.setEventListeners();
+
+
 
 
 // Отображение исходных карточек
