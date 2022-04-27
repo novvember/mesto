@@ -1,5 +1,7 @@
 const path = require('path'); // подключаем path к конфигу вебпак
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключение плагина HtmlWebpackPlugin
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключить CleanWebpackPlugin
+
 
 module.exports = {
   // Точка входа
@@ -40,5 +42,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html' // путь к файлу index.html
     }),
+    new CleanWebpackPlugin(),
   ]
 }
