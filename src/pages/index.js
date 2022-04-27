@@ -28,6 +28,11 @@ import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css'; // импорт css-стилей для сборки в Webpack
 
+function renderCard(data) {
+  const card = new Card(data, cardTemplateSelector, handleCardClick);
+  return card.generateCard();
+}
+
 
 // Инициализация Section, добавление исходных карточек
 function handleCardClick(imageLink, text) {
@@ -36,10 +41,7 @@ function handleCardClick(imageLink, text) {
 
 const cardsSection = new Section({
   items: initialCards,
-  renderer: (data) => {
-    const card = new Card(data, cardTemplateSelector, handleCardClick);
-    return card.generateCard();
-  }
+  renderer: renderCard
 }, cardsSelector);
 
 cardsSection.renderItems();
@@ -66,8 +68,7 @@ profileEditButton.addEventListener('click', function () {
 
 // Инициализация Popup с добавлением новой карточки
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
-  const card = new Card(data, cardTemplateSelector, handleCardClick);
-  cardsSection.addItem(card.generateCard());
+  cardsSection.addItem(renderCard(data));
   newCardPopup.close();
   formValidators[newCardForm.getAttribute('name')].disableButtonState();
 });
