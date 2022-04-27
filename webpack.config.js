@@ -45,8 +45,10 @@ module.exports = {
       {
         test: /\.css$/, // применять это правило только к CSS-файлам
         use: [MiniCssExtractPlugin.loader, {
-          loader: 'css-loader'
-        }]
+          loader: 'css-loader',
+          options: { importLoaders: 1 } // изменение порядка запуска, чтобы правильно работали импорты в css (сначала обработка в PostCSS)
+        },
+        'postcss-loader'] // PostCSS
       },
     ]
   },
