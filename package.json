@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Сервис Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки. Выполнен в рамках серии проектных работ в Яндекс.Практикуме по профессии «Веб-разработчик» (от начала изучения JavaScript, спринт 4, и далее).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novvember/mesto.git"
+  },
+  "author": "Dmitry Kalugin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novvember/mesto/issues"
+  },
+  "homepage": "https://github.com/novvember/mesto#readme"
+}
