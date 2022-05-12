@@ -17,7 +17,8 @@ import {
   newCardButton,
   newCardForm,
   newCardPopupSelector,
-  imagePopupSelector
+  imagePopupSelector,
+  apiConfig
 } from '../utils/constants.js';
 import initialCards from '../utils/initialCards.js';
 import Section from '../components/Section.js';
@@ -26,6 +27,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 import './index.css'; // импорт css-стилей для сборки в Webpack
 
 // Функции
@@ -50,6 +52,8 @@ function handleCardClick(imageLink, text) {
 }
 
 // Инициализация классов
+const api = new Api(apiConfig);
+
 const cardsSection = new Section({
   items: initialCards,
   renderer: renderCard
