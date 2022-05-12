@@ -9,7 +9,6 @@
   background-repeat: no-repeat;
   background-size: contain;
   transition: opacity .2s;
-  flex-shrink: 0; /* Не дает сжиматься при длинном текста */
 }
 
 .card__like-button:hover {
