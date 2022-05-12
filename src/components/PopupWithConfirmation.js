@@ -11,11 +11,11 @@ export default class PopupWithConfirmation extends Popup {
     super.setEventListeners();
 
     this._button.addEventListener('click', () => {
-      this._handleSubmit(this._targetElement);
+      this._handleSubmit(this._target);
     });
   }
 
-  setTargetElement(element) {
-    this._targetElement = element;
+  setTarget(target) {
+    this._target = target;
   }
 }

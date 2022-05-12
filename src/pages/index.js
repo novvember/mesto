@@ -22,6 +22,7 @@ import {
   confirmationPopupSelector,
   apiConfig
 } from '../utils/constants.js';
+
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -56,8 +57,8 @@ function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
 }
 
-function handleDeleteCard(cardElement) {
-  popupWithConfirmation.setTargetElement(cardElement);
+function handleDeleteCard(cardId) {
+  popupWithConfirmation.setTarget(cardId);
   popupWithConfirmation.open();
 }
 
@@ -115,9 +116,12 @@ const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
 
-const popupWithConfirmation = new PopupWithConfirmation(confirmationPopupSelector, (cardElement) => {
-  cardElement.remove();
-  popupWithConfirmation.close();
+const popupWithConfirmation = new PopupWithConfirmation(confirmationPopupSelector, (cardId) => {
+  api.deleteCard(cardId)
+    .then(() => {
+      cards[cardId].delete();
+      popupWithConfirmation.close();
+    })
 });
 
 popupWithConfirmation.setEventListeners();

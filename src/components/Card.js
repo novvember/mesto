@@ -67,7 +67,7 @@ export default class Card {
     if (this._element.querySelector('.card__delete-button')) {
         this._element
         .querySelector('.card__delete-button')
-        .addEventListener('click', () => this._deleteCard());
+        .addEventListener('click', () => this._handleDelete());
       }
   }
 
@@ -75,7 +75,12 @@ export default class Card {
     event.target.classList.toggle('card__like-button_active');
   }
 
-  _deleteCard () {
-    this._handleDeleteCard(this._element);
+  _handleDelete () {
+    this._handleDeleteCard(this._id);
+  }
+
+  delete () {
+    this._element.remove();
+    this._element = null;
   }
 }

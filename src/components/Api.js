@@ -69,4 +69,18 @@ export default class Api {
     })
     .catch(err => console.error(err));
   }
+
+  deleteCard(cardId) {
+    const url =  this._baseUrl + this._cardsUrl;
+
+    return fetch(`${url}/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return Promise.resolve();
+      throw new Error(`Can't delete card from the server`);
+    })
+    .catch(err => console.error(err));
+  }
 }
