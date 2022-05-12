@@ -101,7 +101,7 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
   api.addNewCard(data)
     .then(res => {
-      cardsSection.addItem(renderCard(data));
+      cardsSection.addItem(renderCard(data), true);
       newCardPopup.close();
       formValidators[newCardForm.getAttribute('name')].disableButtonState();
     });
