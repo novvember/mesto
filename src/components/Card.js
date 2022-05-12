@@ -11,6 +11,7 @@ export default class Card {
   constructor ({name, link, likes, owner, createdAt, _id}, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
+    this._likes = likes;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -32,6 +33,7 @@ export default class Card {
     image.src = this._link;
     image.alt = this._name;
     this._element.querySelector('.card__title').textContent = this._name;
+    this._element.querySelector('.card__like-count').textContent = this._likes.length;
 
     // Обработчики нажатий
     this._setEventlisteners();
