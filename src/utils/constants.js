@@ -17,6 +17,7 @@ export const errorClass = 'popup__input-error_visible';
 // Редактирование информации о пользователе
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
+export const profileAvatar = document.querySelector('.profile__avatar');
 export const profileEditButton = document.querySelector('.profile__button_type_edit');
 export const profileEditPopupSelector = '.popup_type_edit-profile';
 const profileEditPopupElement = document.querySelector(profileEditPopupSelector);

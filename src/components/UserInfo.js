@@ -6,9 +6,10 @@ export default class UserInfo {
    * nameElement - элемент с именем пользователя
    * jobElement - элемент с описанием деятельности пользователя
    */
-  constructor({nameElement, jobElement}) {
+  constructor({nameElement, jobElement, avatarElement}) {
     this._nameElement = nameElement;
     this._jobElement = jobElement;
+    this._avatarElement = avatarElement;
   }
 
   getUserInfo() { // убрать
@@ -37,6 +38,10 @@ export default class UserInfo {
 
   renderJob() {
     this._jobElement.textContent = this._job;
+  }
+
+  renderAvatar() {
+    this._avatarElement.src = this._avatar;
   }
 
 

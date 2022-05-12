@@ -10,6 +10,7 @@ import {
   errorClass,
   profileName,
   profileJob,
+  profileAvatar,
   profileEditButton,
   profileNameInput,
   profileJobInput,
@@ -51,9 +52,23 @@ function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
 }
 
+
 // Инициализация классов
 const api = new Api(apiConfig);
-// api.getUserInfo();
+
+const userInfo = new UserInfo({
+  nameElement: profileName,
+  jobElement: profileJob,
+  avatarElement: profileAvatar
+});
+
+api.getUserInfo()
+  .then(res => {
+    userInfo.fill(res);
+    userInfo.renderName();
+    userInfo.renderJob();
+    userInfo.renderAvatar();
+  });
 
 const cardsSection = new Section({
   items: initialCards,
@@ -73,17 +88,7 @@ const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
 
-const userInfo = new UserInfo({
-  nameElement: profileName,
-  jobElement: profileJob
-});
 
-api.getUserInfo()
-  .then(res => {
-    userInfo.fill(res);
-    userInfo.renderName();
-    userInfo.renderJob();
-  });
 
 
 // Установка слушателей событий
