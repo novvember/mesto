@@ -22,7 +22,6 @@ import {
   confirmationPopupSelector,
   apiConfig
 } from '../utils/constants.js';
-// import initialCards from '../utils/initialCards.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -48,7 +47,7 @@ function validateForms (formClasses) {
 const cards = {};
 
 function renderCard(data) {
-  const card = new Card(data, cardTemplateSelector, handleCardClick, handleDeleteCard);
+  const card = new Card(data, cardTemplateSelector, handleCardClick, handleDeleteCard, userInfo.id);
   cards[data._id] = card;
   return card.generateCard();
 }

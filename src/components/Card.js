@@ -11,13 +11,15 @@ export default class Card {
   constructor ({name, link, likes, owner, createdAt, _id},
     templateSelector,
     handleCardClick,
-    handleDeleteCard) {
+    handleDeleteCard,
+    userId) {
     this._name = name;
     this._link = link;
     this._likes = likes;
     this._owner = owner;
     this._createdAt = createdAt;
     this._id = _id;
+    this._userId = userId;
 
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -43,6 +45,10 @@ export default class Card {
     this._element.querySelector('.card__title').textContent = this._name;
     this._element.querySelector('.card__like-count').textContent = this._likes.length;
 
+    if (this._owner._id !== this._userId) {
+      this._element.querySelector('.card__delete-button').remove();
+    }
+
     // Обработчики нажатий
     this._setEventlisteners();
 
@@ -55,12 +61,14 @@ export default class Card {
       .addEventListener('click', this._likeCard);
 
     this._element
-      .querySelector('.card__delete-button')
-      .addEventListener('click', () => this._deleteCard());
-
-    this._element
       .querySelector('.card__image')
       .addEventListener('click', () => this._handleCardClick(this._link, this._name));
+
+    if (this._element.querySelector('.card__delete-button')) {
+        this._element
+        .querySelector('.card__delete-button')
+        .addEventListener('click', () => this._deleteCard());
+      }
   }
 
   _likeCard (event) {

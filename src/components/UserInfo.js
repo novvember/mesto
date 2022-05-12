@@ -29,7 +29,7 @@ export default class UserInfo {
     this._job = about;
     this._avatar = avatar;
     this._cohort = cohort;
-    this._id = _id;
+    this.id = _id;
   }
 
   renderName() {
