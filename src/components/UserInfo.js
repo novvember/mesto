@@ -3,8 +3,10 @@ export default class UserInfo {
    * Класс отвечает за получение и изменение информации о пользователе
    *
    * Параметры:
-   * nameElement - элемент с именем пользователя
-   * jobElement - элемент с описанием деятельности пользователя
+   * nameElement - текстовой элемент с именем пользователя
+   * jobElement - текстовой элемент с описанием деятельности пользователя
+   * avatarElement - элемент img с аватаром пользователя
+   *
    */
   constructor({nameElement, jobElement, avatarElement}) {
     this._nameElement = nameElement;
@@ -12,16 +14,11 @@ export default class UserInfo {
     this._avatarElement = avatarElement;
   }
 
-  getUserInfo() { // убрать
+  getUserInfo() {
     return {
-      name: this._nameElement.textContent,
-      job: this._jobElement.textContent
+      name: this._name,
+      job: this._job
     }
-  }
-
-  setUserInfo({name, job}) { // убрать
-    this._nameElement.textContent = name;
-    this._jobElement.textContent = job;
   }
 
   fill({name, about, avatar, cohort, _id}) {
