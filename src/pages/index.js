@@ -99,9 +99,12 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
 });
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
-  cardsSection.addItem(renderCard(data));
-  newCardPopup.close();
-  formValidators[newCardForm.getAttribute('name')].disableButtonState();
+  api.addNewCard(data)
+    .then(res => {
+      cardsSection.addItem(renderCard(data));
+      newCardPopup.close();
+      formValidators[newCardForm.getAttribute('name')].disableButtonState();
+    });
 });
 
 const imagePopup = new PopupWithImage(imagePopupSelector);

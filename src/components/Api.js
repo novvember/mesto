@@ -51,4 +51,22 @@ export default class Api {
     })
     .catch(err => console.error(err));
   }
+
+  addNewCard({name, link}) {
+    const url =  this._baseUrl + this._cardsUrl;
+
+    return fetch(url, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link
+      })
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't send new card to the server`);
+    })
+    .catch(err => console.error(err));
+  }
 }
