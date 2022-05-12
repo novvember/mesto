@@ -53,6 +53,7 @@ function handleCardClick(imageLink, text) {
 
 // Инициализация классов
 const api = new Api(apiConfig);
+// api.getUserInfo();
 
 const cardsSection = new Section({
   items: initialCards,
@@ -76,6 +77,14 @@ const userInfo = new UserInfo({
   nameElement: profileName,
   jobElement: profileJob
 });
+
+api.getUserInfo()
+  .then(res => {
+    userInfo.fill(res);
+    userInfo.renderName();
+    userInfo.renderJob();
+  });
+
 
 // Установка слушателей событий
 profileEditPopup.setEventListeners();

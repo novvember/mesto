@@ -53,6 +53,8 @@ module.exports = {
     ]
   },
 
+  devtool: 'inline-source-map',
+
   // Плагины
   plugins: [
     new HtmlWebpackPlugin({
@@ -62,3 +64,5 @@ module.exports = {
     new MiniCssExtractPlugin(), // подключение MiniCssExtractPlugin
   ]
 }
+
+
