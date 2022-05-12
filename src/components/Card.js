@@ -8,12 +8,20 @@ export default class Card {
    * templateSelector - селектор template-элемента с шаблоном карточки
    * handleCardClick - обработчик нажатия на изображение карточки
    */
-  constructor ({name, link, likes, owner, createdAt, _id}, templateSelector, handleCardClick) {
+  constructor ({name, link, likes, owner, createdAt, _id},
+    templateSelector,
+    handleCardClick,
+    handleDeleteCard) {
     this._name = name;
     this._link = link;
     this._likes = likes;
+    this._owner = owner;
+    this._createdAt = createdAt;
+    this._id = _id;
+
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   _getTemplate () {
@@ -60,7 +68,6 @@ export default class Card {
   }
 
   _deleteCard () {
-    this._element.remove();
-    this._element = null;
+    this._handleDeleteCard(this._element);
   }
 }

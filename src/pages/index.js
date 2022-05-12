@@ -19,6 +19,7 @@ import {
   newCardForm,
   newCardPopupSelector,
   imagePopupSelector,
+  confirmationPopupSelector,
   apiConfig
 } from '../utils/constants.js';
 // import initialCards from '../utils/initialCards.js';
@@ -26,6 +27,7 @@ import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
@@ -46,13 +48,18 @@ function validateForms (formClasses) {
 const cards = {};
 
 function renderCard(data) {
-  const card = new Card(data, cardTemplateSelector, handleCardClick);
+  const card = new Card(data, cardTemplateSelector, handleCardClick, handleDeleteCard);
   cards[data._id] = card;
   return card.generateCard();
 }
 
 function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
+}
+
+function handleDeleteCard(cardElement) {
+  popupWithConfirmation.setTargetElement(cardElement);
+  popupWithConfirmation.open();
 }
 
 
@@ -108,6 +115,13 @@ const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
 });
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
+
+const popupWithConfirmation = new PopupWithConfirmation(confirmationPopupSelector, (cardElement) => {
+  cardElement.remove();
+  popupWithConfirmation.close();
+});
+
+popupWithConfirmation.setEventListeners();
 
 
 
