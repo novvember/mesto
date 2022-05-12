@@ -89,8 +89,13 @@ api.getInitialCards()
 
 
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
-  userInfo.setUserInfo(data);
-  profileEditPopup.close();
+  api.setUserInfo(data)
+    .then(res => {
+      userInfo.fill(res);
+      userInfo.renderName();
+      userInfo.renderJob();
+      profileEditPopup.close();
+    });
 });
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {

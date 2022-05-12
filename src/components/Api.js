@@ -33,4 +33,22 @@ export default class Api {
     })
     .catch(err => console.error(err));
   }
+
+  setUserInfo({name, job}) {
+    const url =  this._baseUrl + this._userInfoUrl;
+
+    return fetch(url, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about: job
+      })
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't send user info to the server`);
+    })
+    .catch(err => console.error(err));
+  }
 }
