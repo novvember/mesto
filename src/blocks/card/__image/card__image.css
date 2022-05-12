@@ -5,4 +5,5 @@
   object-fit: cover;
   object-position: center;
   cursor: pointer;
+  background-color: #111;
 }

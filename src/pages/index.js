@@ -48,7 +48,7 @@ function validateForms (formClasses) {
 const cards = {};
 
 function renderCard(data) {
-  const card = new Card(data, cardTemplateSelector, handleCardClick, handleDeleteCard, userInfo.id);
+  const card = new Card(data, cardTemplateSelector, handleCardClick, handleDeleteCard, handleLikeCard, userInfo.id);
   cards[data._id] = card;
   return card.generateCard();
 }
@@ -60,6 +60,13 @@ function handleCardClick(imageLink, text) {
 function handleDeleteCard(cardId) {
   popupWithConfirmation.setTarget(cardId);
   popupWithConfirmation.open();
+}
+
+function handleLikeCard(cardId, isLiked) {
+  return api.toggleLike(cardId, isLiked)
+    .then(likes => {
+      cards[cardId].setLikes(likes);
+    });
 }
 
 

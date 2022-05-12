@@ -12,6 +12,7 @@ export default class Card {
     templateSelector,
     handleCardClick,
     handleDeleteCard,
+    handleLikeCard,
     userId) {
     this._name = name;
     this._link = link;
@@ -20,10 +21,12 @@ export default class Card {
     this._createdAt = createdAt;
     this._id = _id;
     this._userId = userId;
+    this._isLiked = this._checkIsLiked();
 
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
+    this._handleLikeCard = handleLikeCard;
   }
 
   _getTemplate () {
@@ -43,7 +46,8 @@ export default class Card {
     image.src = this._link;
     image.alt = this._name;
     this._element.querySelector('.card__title').textContent = this._name;
-    this._element.querySelector('.card__like-count').textContent = this._likes.length;
+
+    this.setLikes();
 
     if (this._owner._id !== this._userId) {
       this._element.querySelector('.card__delete-button').remove();
@@ -58,7 +62,7 @@ export default class Card {
   _setEventlisteners () {
     this._element
       .querySelector('.card__like-button')
-      .addEventListener('click', this._likeCard);
+      .addEventListener('click', (event) => this._likeCard(event));
 
     this._element
       .querySelector('.card__image')
@@ -72,7 +76,34 @@ export default class Card {
   }
 
   _likeCard (event) {
-    event.target.classList.toggle('card__like-button_active');
+    event.target.disabled = true;
+
+    this._handleLikeCard(this._id, this._isLiked)
+      .then(() => {
+        event.target.disabled = false;
+      })
+  }
+
+  setLikes(likes) {
+    const likeCount = this._element.querySelector('.card__like-count');
+    const likeButton = this._element.querySelector('.card__like-button');
+
+    if (likes) {
+      this._likes = likes;
+      this._isLiked = this._checkIsLiked();
+    }
+
+    likeCount.textContent = this._likes.length;
+
+    if (this._isLiked) {
+      likeButton.classList.add('card__like-button_active');
+    } else {
+      likeButton.classList.remove('card__like-button_active');
+    }
+  }
+
+  _checkIsLiked() {
+    return this._likes.some(person => person._id === this._userId);
   }
 
   _handleDelete () {

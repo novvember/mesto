@@ -84,7 +84,7 @@ export default class Api {
     .catch(err => console.error(err));
   }
 
-  setLike(cardId) {
+  _setLike(cardId) {
     const url =  this._baseUrl + this._cardsUrl + '/' + cardId + '/likes';
 
     return fetch(url, {
@@ -95,10 +95,13 @@ export default class Api {
       if (res.ok) return res.json();
       throw new Error(`Can't send like to the server`);
     })
+    .then(res => {
+      return res.likes;
+    })
     .catch(err => console.error(err));
   }
 
-  deleteLike(cardId) {
+  _deleteLike(cardId) {
     const url =  this._baseUrl + this._cardsUrl + '/' + cardId + '/likes';
 
     return fetch(url, {
@@ -109,6 +112,17 @@ export default class Api {
       if (res.ok) return res.json();
       throw new Error(`Can't delete like from the server`);
     })
+    .then(res => {
+      return res.likes;
+    })
     .catch(err => console.error(err));
+  }
+
+  toggleLike(cardId, isLiked) {
+    if (isLiked) {
+      return this._deleteLike(cardId);
+    } else {
+      return this._setLike(cardId);
+    }
   }
 }
