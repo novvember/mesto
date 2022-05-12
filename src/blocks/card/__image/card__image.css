@@ -4,6 +4,10 @@
   height: 282px;
   object-fit: cover;
   object-position: center;
-  cursor: pointer;
   background-color: #111;
+  transition: opacity .3s;
+}
+
+.card__image:hover {
+  opacity: .9;
 }
