@@ -21,7 +21,7 @@ import {
   imagePopupSelector,
   apiConfig
 } from '../utils/constants.js';
-import initialCards from '../utils/initialCards.js';
+// import initialCards from '../utils/initialCards.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -43,8 +43,11 @@ function validateForms (formClasses) {
   });
 }
 
+const cards = {};
+
 function renderCard(data) {
   const card = new Card(data, cardTemplateSelector, handleCardClick);
+  cards[data._id] = card;
   return card.generateCard();
 }
 
@@ -70,10 +73,20 @@ api.getUserInfo()
     userInfo.renderAvatar();
   });
 
+
 const cardsSection = new Section({
-  items: initialCards,
+  items: [],
   renderer: renderCard
 }, cardsSelector);
+
+api.getInitialCards()
+  .then(res => {
+    res.forEach(data => {
+      const card = renderCard(data);
+      cardsSection.addItem(card);
+    });
+});
+
 
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
   userInfo.setUserInfo(data);
@@ -113,8 +126,6 @@ newCardButton.addEventListener('click', function () {
 imagePopup.setEventListeners();
 
 // Вызов функций и методов при загрузке страницы
-cardsSection.renderItems();
-
 validateForms({
   formSelector,
   inputSelector,
