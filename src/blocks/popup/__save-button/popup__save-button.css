@@ -30,3 +30,7 @@
     line-height: 1.21;
   }
 }
+
+.popup__title + .popup__save-button {
+  margin-top: 30px;
+}
