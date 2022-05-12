@@ -71,15 +71,43 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    const url =  this._baseUrl + this._cardsUrl;
+    const url =  this._baseUrl + this._cardsUrl + '/' + cardId;
 
-    return fetch(`${url}/${cardId}`, {
+    return fetch(url, {
       method: 'DELETE',
       headers: this._headers
     })
     .then(res => {
       if (res.ok) return Promise.resolve();
       throw new Error(`Can't delete card from the server`);
+    })
+    .catch(err => console.error(err));
+  }
+
+  setLike(cardId) {
+    const url =  this._baseUrl + this._cardsUrl + '/' + cardId + '/likes';
+
+    return fetch(url, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't send like to the server`);
+    })
+    .catch(err => console.error(err));
+  }
+
+  deleteLike(cardId) {
+    const url =  this._baseUrl + this._cardsUrl + '/' + cardId + '/likes';
+
+    return fetch(url, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't delete like from the server`);
     })
     .catch(err => console.error(err));
   }
