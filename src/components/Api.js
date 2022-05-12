@@ -125,4 +125,21 @@ export default class Api {
       return this._setLike(cardId);
     }
   }
+
+  changeAvatar(link) {
+    const url =  this._baseUrl + this._userInfoUrl + '/avatar';
+
+    return fetch(url, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't send avatar to the server`);
+    })
+    .catch(err => console.error(err));
+  }
 }
