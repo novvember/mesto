@@ -1,13 +1,21 @@
 export default class Api {
+  /**
+   * Класс отвечает за осуществление и обработку сетевых запросов к серверу
+   *
+   * Параметры:
+   * {
+   *   baseUrl, // базовая часть url-адреса сервера
+   *   headers // заголовки запроса, будут передаваться при каждом обращении
+   * }
+   */
+
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
     this._headers = headers;
-    this._userInfoUrl = '/users/me';
-    this._cardsUrl = '/cards';
   }
 
   getUserInfo() {
-    const url =  this._baseUrl + this._userInfoUrl;
+    const url =  this._baseUrl + `/users/me`;
 
     return fetch(url, {
       method: 'GET',
@@ -20,22 +28,8 @@ export default class Api {
     .catch(err => console.error(err));
   }
 
-  getInitialCards() {
-    const url =  this._baseUrl + this._cardsUrl;
-
-    return fetch(url, {
-      method: 'GET',
-      headers: this._headers,
-    })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`Can't get initial cards from the server`);
-    })
-    .catch(err => console.error(err));
-  }
-
   setUserInfo({name, job}) {
-    const url =  this._baseUrl + this._userInfoUrl;
+    const url =  this._baseUrl + `/users/me`;
 
     return fetch(url, {
       method: 'PATCH',
@@ -52,8 +46,39 @@ export default class Api {
     .catch(err => console.error(err));
   }
 
+  changeAvatar(link) {
+    const url =  this._baseUrl + `/users/me/avatar`;
+
+    return fetch(url, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't send avatar to the server`);
+    })
+    .catch(err => console.error(err));
+  }
+
+  getInitialCards() {
+    const url =  this._baseUrl + `/cards`;
+
+    return fetch(url, {
+      method: 'GET',
+      headers: this._headers,
+    })
+    .then(res => {
+      if (res.ok) return res.json();
+      throw new Error(`Can't get initial cards from the server`);
+    })
+    .catch(err => console.error(err));
+  }
+
   addNewCard({name, link}) {
-    const url =  this._baseUrl + this._cardsUrl;
+    const url =  this._baseUrl + `/cards`;
 
     return fetch(url, {
       method: 'POST',
@@ -71,7 +96,7 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    const url =  this._baseUrl + this._cardsUrl + '/' + cardId;
+    const url =  this._baseUrl + `/cards/${cardId}`;
 
     return fetch(url, {
       method: 'DELETE',
@@ -85,7 +110,7 @@ export default class Api {
   }
 
   _setLike(cardId) {
-    const url =  this._baseUrl + this._cardsUrl + '/' + cardId + '/likes';
+    const url =  this._baseUrl + `/cards/${cardId}/likes`;
 
     return fetch(url, {
       method: 'PUT',
@@ -102,7 +127,7 @@ export default class Api {
   }
 
   _deleteLike(cardId) {
-    const url =  this._baseUrl + this._cardsUrl + '/' + cardId + '/likes';
+    const url =  this._baseUrl + `/cards/${cardId}/likes`;
 
     return fetch(url, {
       method: 'DELETE',
@@ -124,22 +149,5 @@ export default class Api {
     } else {
       return this._setLike(cardId);
     }
-  }
-
-  changeAvatar(link) {
-    const url =  this._baseUrl + this._userInfoUrl + '/avatar';
-
-    return fetch(url, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: link
-      })
-    })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error(`Can't send avatar to the server`);
-    })
-    .catch(err => console.error(err));
   }
 }
