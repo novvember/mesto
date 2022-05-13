@@ -2,10 +2,10 @@ import Popup from "./Popup.js";
 
 export default class PopupWithImage extends Popup {
   /**
-   * Класс отвечает за работу с попапом, содержащим увеличенное изображение
+   * Отвечает за работу с попапом, содержащим увеличенное изображение
+   * @constructor
    *
-   * Параметры:
-   * popupSelector - селектор элемента с попапом
+   * @param {string} popupSelector - Селектор элемента с попапом
    */
   constructor(popupSelector) {
     super(popupSelector);
@@ -13,6 +13,11 @@ export default class PopupWithImage extends Popup {
     this._captionElement = this._popup.querySelector('.popup__image-caption');
   }
 
+  /**
+   * Заполняет попап нужными значениями и открывает его
+   * @param {string} imageLink - Ссылка на картинку
+   * @param {string} text - Подпись картинки
+   */
   open(imageLink, text) {
     this._figureElement.src = imageLink;
     this._figureElement.alt = text;
