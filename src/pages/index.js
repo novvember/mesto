@@ -36,9 +36,28 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import './index.css'; // импорт css-стилей для сборки в Webpack
 
-// Функции
-const formValidators = {};
 
+/**
+ * Переменные страницы
+ */
+const formValidators = {}; // хранение экземпляров валидаторов форм
+const cards = {}; // хранение полученных карточек
+
+
+/**
+ * Дополнительные функции
+ */
+
+/**
+ * Запускает валидацию всех форм на странице
+ * @param {object} formClasses - Объект с классами и селекторами элементов форм:
+ * - formSelector,
+ * - inputSelector,
+ * - submitButtonSelector,
+ * - inactiveButtonClass,
+ * - inputErrorClass,
+ * - errorClass
+ */
 function validateForms (formClasses) {
   const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
   formElements.forEach(formElement => {
@@ -48,23 +67,41 @@ function validateForms (formClasses) {
   });
 }
 
-const cards = {};
-
+/**
+ * Создает элемент карточки
+ * @param {object} data - Объект с содержимым карточки
+ * @returns {object}
+ */
 function renderCard(data) {
   const card = new Card(data, cardTemplateSelector, handleCardClick, handleDeleteCard, handleLikeCard, userInfo.id);
   cards[data._id] = card;
   return card.generateCard();
 }
 
+/**
+ * Обрабатывает нажатие на картинку карточки
+ * @param {string} imageLink - Ссылка на картинку
+ * @param {string} text - Описание картинки
+ */
 function handleCardClick(imageLink, text) {
   imagePopup.open(imageLink, text);
 }
 
+/**
+ * Обрабатывает нажатие на удаление карточки
+ * @param {string} cardId - ID карточки
+ */
 function handleDeleteCard(cardId) {
   popupWithConfirmation.setTarget(cardId);
   popupWithConfirmation.open();
 }
 
+/**
+ * Обрабатывает нажатие на лайк в карточке
+ * @param {string} cardId - ID карточки
+ * @param {boolean} isLiked - Текущий статус лайка
+ * @returns {Promise}
+ */
 function handleLikeCard(cardId, isLiked) {
   return api.toggleLike(cardId, isLiked)
     .then(likes => {
@@ -73,7 +110,9 @@ function handleLikeCard(cardId, isLiked) {
 }
 
 
-// Инициализация классов
+/**
+ * Инициализация классов
+ */
 const api = new Api(apiConfig);
 
 const userInfo = new UserInfo({
@@ -82,29 +121,12 @@ const userInfo = new UserInfo({
   avatarElement: profileAvatar
 });
 
-api.getUserInfo()
-  .then(res => {
-    userInfo.fill(res);
-    userInfo.renderName();
-    userInfo.renderJob();
-    userInfo.renderAvatar();
-  });
-
-
 const cardsSection = new Section({
   items: [],
   renderer: renderCard
 }, cardsSelector);
 
-api.getInitialCards()
-  .then(res => {
-    res.forEach(data => {
-      const card = renderCard(data);
-      cardsSection.addItem(card);
-    });
-});
-
-
+// Попапы
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
   return api.setUserInfo(data)
     .then(res => {
@@ -123,8 +145,6 @@ const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
       avatarChangePopup.close();
     });
 });
-
-avatarChangePopup.setEventListeners();
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
   return api.addNewCard(data)
@@ -145,12 +165,31 @@ const popupWithConfirmation = new PopupWithConfirmation(confirmationPopupSelecto
     })
 });
 
-popupWithConfirmation.setEventListeners();
+
+/**
+ * Первоначальное получение данных от сервера
+ */
+api.getUserInfo()
+  .then(res => {
+    userInfo.fill(res);
+    userInfo.renderName();
+    userInfo.renderJob();
+    userInfo.renderAvatar();
+  });
+
+api.getInitialCards()
+  .then(res => {
+    res.forEach(data => {
+      const card = renderCard(data);
+      cardsSection.addItem(card);
+    });
+});
 
 
-
-
-// Установка слушателей событий
+/**
+ * Установка слушателей для работы попапов
+ */
+// Попап редактирования информации
 profileEditPopup.setEventListeners();
 
 profileEditButton.addEventListener('click', function () {
@@ -163,19 +202,30 @@ profileEditButton.addEventListener('click', function () {
   profileEditPopup.open();
 });
 
+// Попап обновления аватара
+avatarChangePopup.setEventListeners();
+
 avatarChangeButton.addEventListener('click', () => {
   avatarChangePopup.open();
-})
+});
 
+// Попап добавления новой карточки
 newCardPopup.setEventListeners();
 
 newCardButton.addEventListener('click', function () {
   newCardPopup.open();
 });
 
+// Попап с подтвержденим информации
+popupWithConfirmation.setEventListeners();
+
+// Попап с увеличенным изображением
 imagePopup.setEventListeners();
 
-// Вызов функций и методов при загрузке страницы
+
+/**
+ * Включение валидации форм
+ */
 validateForms({
   formSelector,
   inputSelector,

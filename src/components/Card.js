@@ -69,6 +69,9 @@ export default class Card {
 
     this.setLikes();
 
+    console.log(this._owner._id);
+    console.log(this._userId);
+
     if (this._owner._id !== this._userId) {
       this._element.querySelector('.card__delete-button').remove();
     }
