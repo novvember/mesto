@@ -2,11 +2,11 @@ import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   /**
-   * Класс отвечает за работу с попапом, содержащим форму
+   * Отвечает за работу с попапом, содержащим форму
+   * @constructor
    *
-   * Параметры:
-   * popupSelector - селектор элемента с попапом
-   * handleSubmit - обработчик отправки формы
+   * @param {string} popupSelector - Селектор элемента с попапом
+   * @param {function} handleSubmit - Колбек для обработки отправки формы
    */
   constructor(popupSelector, handleSubmit) {
     super(popupSelector);
@@ -15,6 +15,10 @@ export default class PopupWithForm extends Popup {
     this._inputValues = {};
   }
 
+  /**
+   * Сохраняет все поля ввода в объект
+   * @returns {object}
+   */
   _getInputValues() {
     this._form.querySelectorAll('.popup__input').forEach(input => {
       this._inputValues[input.name] = input.value;
@@ -22,6 +26,9 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
+  /**
+   * Устанавливает необходимые слушатели на элементы попапа
+   */
   setEventListeners() {
     super.setEventListeners();
 
@@ -31,6 +38,9 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  /**
+   * Выполняет действия при сабмите формы и вызывает колбек
+   */
   _submit() {
     const button = this._form.querySelector('.popup__save-button');
     const tempText = 'Сохранение...';
@@ -45,6 +55,9 @@ export default class PopupWithForm extends Popup {
       });
   }
 
+  /**
+   * Закрывает попап
+   */
   close() {
     super.close();
     this._form.reset();
