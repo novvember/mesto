@@ -116,7 +116,12 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
 });
 
 const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
-  console.log(data);
+  api.changeAvatar(data.link)
+    .then((res) => {
+      userInfo.fill(res);
+      userInfo.renderAvatar();
+      avatarChangePopup.close();
+    });
 });
 
 avatarChangePopup.setEventListeners();

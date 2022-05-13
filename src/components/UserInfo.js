@@ -40,6 +40,4 @@ export default class UserInfo {
   renderAvatar() {
     this._avatarElement.src = this._avatar;
   }
-
-
 }

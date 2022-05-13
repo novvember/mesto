@@ -57,7 +57,7 @@ export default class Api {
   /**
    * Устанавливает новый аватар пользователя
    * @param {string} link - Ссылка на картинку
-   * @returns {Promise} Промис с ответом сервера
+   * @returns {Promise} Промис с ответом сервера: обновленный объект пользователя
    */
   changeAvatar(link) {
     const url =  this._baseUrl + `/users/me/avatar`;
