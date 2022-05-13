@@ -1,4 +1,6 @@
-// Импорт данных из других модулей
+/**
+ * Импорт данных из других модулей
+ */
 import {
   cardsSelector,
   cardTemplateSelector,
@@ -15,6 +17,8 @@ import {
   profileNameInput,
   profileJobInput,
   profileEditPopupSelector,
+  avatarChangeButton,
+  avatarChangePopupSelector,
   newCardButton,
   newCardForm,
   newCardPopupSelector,
@@ -22,7 +26,6 @@ import {
   confirmationPopupSelector,
   apiConfig
 } from '../utils/constants.js';
-
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -112,6 +115,12 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
     });
 });
 
+const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
+  console.log(data);
+});
+
+avatarChangePopup.setEventListeners();
+
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
   api.addNewCard(data)
     .then(res => {
@@ -148,6 +157,10 @@ profileEditButton.addEventListener('click', function () {
   profileJobInput.dispatchEvent(new Event('input'));
   profileEditPopup.open();
 });
+
+avatarChangeButton.addEventListener('click', () => {
+  avatarChangePopup.open();
+})
 
 newCardPopup.setEventListeners();
 
