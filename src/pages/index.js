@@ -106,7 +106,7 @@ api.getInitialCards()
 
 
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
-  api.setUserInfo(data)
+  return api.setUserInfo(data)
     .then(res => {
       userInfo.fill(res);
       userInfo.renderName();
@@ -116,7 +116,7 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
 });
 
 const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
-  api.changeAvatar(data.link)
+  return api.changeAvatar(data.link)
     .then((res) => {
       userInfo.fill(res);
       userInfo.renderAvatar();
@@ -127,7 +127,7 @@ const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
 avatarChangePopup.setEventListeners();
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
-  api.addNewCard(data)
+  return api.addNewCard(data)
     .then(res => {
       cardsSection.addItem(renderCard(res), true);
       newCardPopup.close();
