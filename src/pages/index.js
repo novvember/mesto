@@ -4,15 +4,8 @@
 import {
   cardsSelector,
   cardTemplateSelector,
-  formSelector,
-  inputSelector,
-  submitButtonSelector,
-  inactiveButtonClass,
-  inputErrorClass,
-  errorClass,
-  profileName,
-  profileJob,
-  profileAvatar,
+  formSelectors, // селекторы и классы элементов формы
+  profileElements, // элементы страницы с информацией о пользователе
   profileEditButton,
   profileNameInput,
   profileJobInput,
@@ -27,7 +20,6 @@ import {
 } from '../utils/constants.js';
 
 import {apiConfig} from '../utils/apiConfig.js';
-console.log(apiConfig);
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -52,7 +44,7 @@ const cards = {}; // хранение полученных карточек
 
 /**
  * Запускает валидацию всех форм на странице
- * @param {object} formClasses - Объект с классами и селекторами элементов форм:
+ * @param {object} formSelectors - Объект с классами и селекторами элементов форм:
  * - formSelector,
  * - inputSelector,
  * - submitButtonSelector,
@@ -60,10 +52,10 @@ const cards = {}; // хранение полученных карточек
  * - inputErrorClass,
  * - errorClass
  */
-function validateForms (formClasses) {
-  const formElements = Array.from(document.querySelectorAll(formClasses.formSelector));
+function validateForms (formSelectors) {
+  const formElements = Array.from(document.querySelectorAll(formSelectors.formSelector));
   formElements.forEach(formElement => {
-    const form = new FormValidator(formClasses, formElement);
+    const form = new FormValidator(formSelectors, formElement);
     formValidators[formElement.getAttribute('name')] = form;
     form.enableValidation();
   });
@@ -118,9 +110,9 @@ function handleLikeCard(cardId, isLiked) {
 const api = new Api(apiConfig);
 
 const userInfo = new UserInfo({
-  nameElement: profileName,
-  jobElement: profileJob,
-  avatarElement: profileAvatar
+  nameElement: profileElements.name,
+  jobElement: profileElements.job,
+  avatarElement: profileElements.avatar
 });
 
 const cardsSection = new Section({
@@ -229,11 +221,4 @@ imagePopup.setEventListeners();
 /**
  * Включение валидации форм
  */
-validateForms({
-  formSelector,
-  inputSelector,
-  submitButtonSelector,
-  inactiveButtonClass,
-  inputErrorClass,
-  errorClass
-});
+validateForms(formSelectors);
