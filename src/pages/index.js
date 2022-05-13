@@ -175,15 +175,16 @@ api.getUserInfo()
     userInfo.renderName();
     userInfo.renderJob();
     userInfo.renderAvatar();
-  });
-
-api.getInitialCards()
+  })
+  .then(() => {
+    return api.getInitialCards();
+  })
   .then(res => {
     res.forEach(data => {
       const card = renderCard(data);
       cardsSection.addItem(card);
     });
-});
+  });
 
 
 /**

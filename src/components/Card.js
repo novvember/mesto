@@ -10,14 +10,11 @@ export default class Card {
    * - owner - Объект пользователя-владельца
    * - createdAt - Время создания карточки
    * - _id - id карточки
-   *
    * @param {string} templateSelector - Селектор template-элемента с шаблоном карточки
-   *
    * @param {function} handleCardClick - Функция-обработчик для клика по картинке
-   *
    * @param {function} handleDeleteCard - Функция-обработчик для кнопки удаления карточки
-   *
    * @param {function} handleLikeCard - Функция-обработчик для лайка карточки
+   * @param {string} userId - ID текущего пользователя
    */
   constructor (
     {name, link, likes, owner, createdAt, _id},
@@ -68,9 +65,6 @@ export default class Card {
     this._element.querySelector('.card__title').textContent = this._name;
 
     this.setLikes();
-
-    console.log(this._owner._id);
-    console.log(this._userId);
 
     if (this._owner._id !== this._userId) {
       this._element.querySelector('.card__delete-button').remove();
