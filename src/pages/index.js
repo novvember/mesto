@@ -24,8 +24,10 @@ import {
   newCardPopupSelector,
   imagePopupSelector,
   confirmationPopupSelector,
-  apiConfig
 } from '../utils/constants.js';
+
+import {apiConfig} from '../utils/apiConfig.js';
+console.log(apiConfig);
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
