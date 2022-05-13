@@ -1,9 +1,9 @@
 export default class FormValidator {
-  /**
-   * Класс отвечает за валидацию формы, отображение/скрытие ошибок, отображение кнопки отправки
+/**
+   * Отвечает за валидацию формы, отображение/скрытие ошибок, отображение кнопки отправки
+   * @constructor
    *
-   * Параметры:
-   * formClasses - селекторы и классы элементов формы, формат:
+   * @param {object} formClasses - Cелекторы и классы элементов формы, формат:
    * {
    *   formSelector,
    *   inputSelector,
@@ -12,8 +12,9 @@ export default class FormValidator {
    *   inputErrorClass,
    *   errorClass
    * }
-   * formElement - элемент с валидируемой формой
+   * @param {object} formElement - Элемент формы
    */
+
   constructor (formClasses, formElement) {
     // Форма
     this._formElement = formElement;
@@ -29,10 +30,16 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
+  /**
+   * Инициирует валидацию
+   */
   enableValidation () {
       this._setEventListeners();
   }
 
+  /**
+   * Устанавливает все слушатели событий на форму
+   */
   _setEventListeners () {
     this._inputElements.forEach( inputElement => {
       inputElement.addEventListener('input', () => {
@@ -45,6 +52,10 @@ export default class FormValidator {
     this._toggleButtonState();
   }
 
+  /**
+   * Проверяет элемент формы на валидности и скрывает/отображает ошибку
+   * @param {object} inputElement - Элемент формы
+   */
   _isValid (inputElement) {
     if (inputElement.validity.valid) {
       this._hideInputError(inputElement);
@@ -53,6 +64,11 @@ export default class FormValidator {
     }
   }
 
+  /**
+   * Показывает ошибку у поля вввода
+   * @param {object} inputElement - элемент формы
+   * @param {string} errorMessage - Текст ошибки для отображения
+   */
   _showInputError (inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
@@ -60,6 +76,10 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
+  /**
+   * Скрывает ошибку у поля вввода
+   * @param {object} inputElement - элемент формы
+   */
   _hideInputError (inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
@@ -67,6 +87,9 @@ export default class FormValidator {
     errorElement.textContent = '';
   }
 
+  /**
+   * Переключает состояние кнопки сабмита формы
+   */
   _toggleButtonState () {
     if (this._hasInvalidInput()) {
       this.disableButtonState();
@@ -75,16 +98,26 @@ export default class FormValidator {
     }
   }
 
+  /**
+   * Отключает кнопку сабмита формы
+   */
   disableButtonState () {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
   }
 
+  /**
+   * Включает кнопку сабмита формы
+   */
   _enableButtonState () {
     this._buttonElement.classList.remove(this._inactiveButtonClass);
     this._buttonElement.disabled = false;
   }
 
+  /**
+   * Проверяет форму на наличие невалидных полей
+   * @returns {boolean}
+   */
   _hasInvalidInput () {
     return this._inputElements.some( inputElement => inputElement.validity.valid === false);
   }
