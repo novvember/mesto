@@ -135,7 +135,8 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
       userInfo.renderName();
       userInfo.renderJob();
       profileEditPopup.close();
-    });
+    })
+    .catch(err => console.error(err));
 }, handleDisableSubmitButton);
 
 const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
@@ -144,7 +145,8 @@ const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
       userInfo.fill(res);
       userInfo.renderAvatar();
       avatarChangePopup.close();
-    });
+    })
+    .catch(err => console.error(err));
 }, handleDisableSubmitButton);
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
@@ -152,7 +154,8 @@ const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
     .then(res => {
       cardsSection.addItem(renderCard(res), true);
       newCardPopup.close();
-    });
+    })
+    .catch(err => console.error(err));
 }, handleDisableSubmitButton);
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
@@ -163,6 +166,7 @@ const popupWithConfirmation = new PopupWithConfirmation(confirmationPopupSelecto
       cards[cardId].delete();
       popupWithConfirmation.close();
     })
+    .catch(err => console.error(err));
 });
 
 
@@ -184,7 +188,8 @@ api.getUserInfo()
       const card = renderCard(data);
       cardsSection.addItem(card);
     });
-  });
+  })
+  .catch(err => console.error(err));
 
 
 /**

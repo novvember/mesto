@@ -25,9 +25,8 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't get user info from the server`);
-    })
-    .catch(err => console.error(err));
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+    });
   }
 
   /**
@@ -50,9 +49,8 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't send user info to the server`);
-    })
-    .catch(err => console.error(err));
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+    });
   }
 
   /**
@@ -72,9 +70,8 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't send avatar to the server`);
-    })
-    .catch(err => console.error(err));
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+    });
   }
 
   /**
@@ -90,9 +87,8 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't get initial cards from the server`);
-    })
-    .catch(err => console.error(err));
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+    });
   }
 
   /**
@@ -115,9 +111,8 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't send new card to the server`);
-    })
-    .catch(err => console.error(err));
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+    });
   }
 
   /**
@@ -134,9 +129,8 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return Promise.resolve();
-      throw new Error(`Can't delete card from the server`);
-    })
-    .catch(err => console.error(err));
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+    });
   }
 
   /**
@@ -153,12 +147,11 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't send like to the server`);
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
     })
     .then(res => {
       return res.likes;
-    })
-    .catch(err => console.error(err));
+    });
   }
 
   /**
@@ -175,12 +168,11 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`Can't delete like from the server`);
+      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
     })
     .then(res => {
       return res.likes;
-    })
-    .catch(err => console.error(err));
+    });
   }
 
   /**
