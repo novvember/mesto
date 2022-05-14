@@ -217,9 +217,9 @@ profileEditButton.addEventListener('click', function () {
     name: profileNameInput.value,
     job: profileJobInput.value
   } = userInfo.getUserInfo());
+  profileEditPopup.open();
   profileNameInput.dispatchEvent(new Event('input'));
   profileJobInput.dispatchEvent(new Event('input'));
-  profileEditPopup.open();
 });
 
 // Попап обновления аватара
