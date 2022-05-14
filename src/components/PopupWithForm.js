@@ -17,6 +17,8 @@ export default class PopupWithForm extends Popup {
     this._inputValues = {};
     this._handleDisableSubmitButton = handleDisableSubmitButton;
     this.formName = this._form.getAttribute('name');
+    this._allInputs = this._form.querySelectorAll('.popup__input');
+    this._submitButton = this._form.querySelector('.popup__save-button');
   }
 
   /**
@@ -24,7 +26,7 @@ export default class PopupWithForm extends Popup {
    * @returns {object}
    */
   _getInputValues() {
-    this._form.querySelectorAll('.popup__input').forEach(input => {
+    this._allInputs.forEach(input => {
       this._inputValues[input.name] = input.value;
     });
     return this._inputValues;
@@ -46,16 +48,15 @@ export default class PopupWithForm extends Popup {
    * Выполняет действия при сабмите формы и вызывает колбек
    */
   _submit() {
-    const button = this._form.querySelector('.popup__save-button');
     const tempText = 'Сохранение...';
-    const originalText = button.textContent;
+    const originalText = this._submitButton.textContent;
 
-    button.disabled = true;
-    button.textContent = tempText;
+    this._submitButton.disabled = true;
+    this._submitButton.textContent = tempText;
     this._handleSubmit(this._getInputValues())
       .then(() => {
-        button.textContent = originalText;
-        button.disabled = false;
+        this._submitButton.textContent = originalText;
+        this._submitButton.disabled = false;
       });
   }
 
