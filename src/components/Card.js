@@ -57,6 +57,7 @@ export default class Card {
    */
   generateCard () {
     this._element = this._getTemplate();
+    this._likeButton = this._element.querySelector('.card__like-button');
 
     // Заполнение содержимого
     const image = this._element.querySelector('.card__image');
@@ -81,7 +82,7 @@ export default class Card {
    */
   _setEventlisteners () {
     // Лайк карточки
-    this._element.querySelector('.card__like-button').addEventListener('click', (event) => this._likeCard(event));
+    this._element.querySelector('.card__like-button').addEventListener('click', () => this._likeCard());
 
     // Клик по картинке
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick(this._link, this._name));
@@ -94,14 +95,23 @@ export default class Card {
 
   /**
    * Обрабатывает лайк карточки
-   * @param {object} event - Событие клика
    */
-  _likeCard (event) {
-    event.target.disabled = true;
+  _likeCard () {
     this._handleLikeCard(this._id, this._isLiked)
-      .then(() => {
-        event.target.disabled = false;
-      })
+  }
+
+  /**
+   * Блокирует кнопку лайка
+   */
+  blockLikeButton() {
+    this._likeButton.disabled = true;
+  }
+
+  /**
+   * Разблокирует кнопку лайка
+   */
+  unblockLikeButton() {
+    this._likeButton.disabled = false;
   }
 
   /**

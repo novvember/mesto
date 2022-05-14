@@ -97,11 +97,16 @@ function handleDeleteCard(cardId) {
  * @returns {Promise}
  */
 function handleLikeCard(cardId, isLiked) {
-  return api.toggleLike(cardId, isLiked)
+  cards[cardId].blockLikeButton();
+
+  api.toggleLike(cardId, isLiked)
     .then(likes => {
       cards[cardId].setLikes(likes);
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
+    .finally(() => {
+      cards[cardId].unblockLikeButton();
+    });
 }
 
 /**
