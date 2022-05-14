@@ -17,7 +17,7 @@ export default class Api {
    * @returns {Promise} Промис с ответом сервера: объект текущего пользователя
    */
   getUserInfo() {
-    const url =  this._baseUrl + `/users/me`;
+    const url = `${this._baseUrl}/users/me`;
 
     return fetch(url, {
       method: 'GET',
@@ -38,7 +38,7 @@ export default class Api {
    * @returns {Promise} Промис с ответом сервера: обновленный объект пользователя
    */
   setUserInfo({name, job}) {
-    const url =  this._baseUrl + `/users/me`;
+    const url = `${this._baseUrl}/users/me`;
 
     return fetch(url, {
       method: 'PATCH',
@@ -61,7 +61,7 @@ export default class Api {
    * @returns {Promise} Промис с ответом сервера: обновленный объект пользователя
    */
   changeAvatar(link) {
-    const url =  this._baseUrl + `/users/me/avatar`;
+    const url = `${this._baseUrl}/users/me/avatar`;
 
     return fetch(url, {
       method: 'PATCH',
@@ -82,7 +82,7 @@ export default class Api {
    * @returns {Promise} Промис с ответом сервера: массив карточек
    */
   getInitialCards() {
-    const url =  this._baseUrl + `/cards`;
+    const url = `${this._baseUrl}/cards`;
 
     return fetch(url, {
       method: 'GET',
@@ -103,7 +103,7 @@ export default class Api {
    * @returns {Promise} Промис с ответом сервера: объект созданной карточки
    */
   addNewCard({name, link}) {
-    const url =  this._baseUrl + `/cards`;
+    const url = `${this._baseUrl}/cards`;
 
     return fetch(url, {
       method: 'POST',
@@ -126,7 +126,7 @@ export default class Api {
    * @returns {Promise} Промис с ответом сервера
    */
   deleteCard(cardId) {
-    const url =  this._baseUrl + `/cards/${cardId}`;
+    const url = `${this._baseUrl}/cards/${cardId}`;
 
     return fetch(url, {
       method: 'DELETE',
@@ -145,7 +145,7 @@ export default class Api {
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
   _setLike(cardId) {
-    const url =  this._baseUrl + `/cards/${cardId}/likes`;
+    const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
       method: 'PUT',
@@ -167,7 +167,7 @@ export default class Api {
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
   _deleteLike(cardId) {
-    const url =  this._baseUrl + `/cards/${cardId}/likes`;
+    const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
       method: 'DELETE',
