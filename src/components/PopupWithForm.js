@@ -7,12 +7,16 @@ export default class PopupWithForm extends Popup {
    *
    * @param {string} popupSelector - Селектор элемента с попапом
    * @param {function} handleSubmit - Колбек для обработки отправки формы
+   * @param {function} handleDisableSubmitButton - Колбек для отключения кнопки сабмита формы
+   *
    */
-  constructor(popupSelector, handleSubmit) {
+  constructor(popupSelector, handleSubmit, handleDisableSubmitButton) {
     super(popupSelector);
     this._handleSubmit = handleSubmit;
     this._form = this._popup.querySelector('.popup__form');
     this._inputValues = {};
+    this._handleDisableSubmitButton = handleDisableSubmitButton;
+    this.formName = this._form.getAttribute('name');
   }
 
   /**
@@ -61,5 +65,6 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
+    this._handleDisableSubmitButton();
   }
 }

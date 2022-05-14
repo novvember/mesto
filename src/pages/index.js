@@ -103,6 +103,13 @@ function handleLikeCard(cardId, isLiked) {
     });
 }
 
+/**
+ * Выключает кнопку сабмита при вызове из экземпляра попапа с формой
+ */
+function handleDisableSubmitButton () {
+  formValidators[this.formName].disableButtonState();
+}
+
 
 /**
  * Инициализация классов
@@ -129,7 +136,7 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
       userInfo.renderJob();
       profileEditPopup.close();
     });
-});
+}, handleDisableSubmitButton);
 
 const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
   return api.changeAvatar(data.link)
@@ -138,16 +145,15 @@ const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
       userInfo.renderAvatar();
       avatarChangePopup.close();
     });
-});
+}, handleDisableSubmitButton);
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
   return api.addNewCard(data)
     .then(res => {
       cardsSection.addItem(renderCard(res), true);
       newCardPopup.close();
-      formValidators[newCardForm.getAttribute('name')].disableButtonState();
     });
-});
+}, handleDisableSubmitButton);
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
 
