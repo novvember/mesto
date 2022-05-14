@@ -100,7 +100,8 @@ function handleLikeCard(cardId, isLiked) {
   return api.toggleLike(cardId, isLiked)
     .then(likes => {
       cards[cardId].setLikes(likes);
-    });
+    })
+    .catch(err => console.error(err));
 }
 
 /**
