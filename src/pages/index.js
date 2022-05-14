@@ -191,18 +191,17 @@ const popupWithConfirmation = new PopupWithConfirmation(confirmationPopupSelecto
 /**
  * Первоначальное получение данных от сервера
  */
-api.getUserInfo()
-  .then(res => {
-    userInfo.fill(res);
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards()
+])
+  .then(results => {
+    userInfo.fill(results[0]);
     userInfo.renderName();
     userInfo.renderJob();
     userInfo.renderAvatar();
-  })
-  .then(() => {
-    return api.getInitialCards();
-  })
-  .then(res => {
-    cardsSection.renderItems(res);
+
+    cardsSection.renderItems(results[1]);
   })
   .catch(err => console.error(err));
 
