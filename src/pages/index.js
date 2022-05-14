@@ -122,10 +122,7 @@ const userInfo = new UserInfo({
   avatarElement: profileElements.avatar
 });
 
-const cardsSection = new Section({
-  items: [],
-  renderer: renderCard
-}, cardsSelector);
+const cardsSection = new Section(renderCard, cardsSelector);
 
 // Попапы
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
@@ -199,10 +196,7 @@ api.getUserInfo()
     return api.getInitialCards();
   })
   .then(res => {
-    res.forEach(data => {
-      const card = renderCard(data);
-      cardsSection.addItem(card);
-    });
+    cardsSection.renderItems(res);
   })
   .catch(err => console.error(err));
 

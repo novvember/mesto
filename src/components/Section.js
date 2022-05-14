@@ -3,22 +3,20 @@ export default class Section {
    * Отвечает за вывод элементов на страницу в определенном блоке
    * @constructor
    *
-   * @param {object} Объект с параметрами:
-   * - items - Массив данных, которые нужно добавить на страницу при инициализации класса,
-   * - renderer - Функция, которая отвечает за создание и отрисовку данных на странице,
+   * @param {function} renderer - Функция, которая отвечает за создание и отрисовку данных на странице
    * @param {string} containerSelector - Селектор контейнера, в который нужно добавлять созданные элементы
    */
-  constructor({items, renderer}, containerSelector) {
-    this._items = items;
+  constructor(renderer, containerSelector) {
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
   }
 
   /**
-   * Добавляет все исходные элементы на страницу
+   * Создает и добавляет элементы на страницу
+   * @param {array} items - Массив с данными, необходимыми для создания карточек
    */
-  renderItems() {
-    this._items.forEach(item => {
+  renderItems(items) {
+    items.forEach(item => {
       const element = this._renderer(item);
       this.addItem(element);
     })
