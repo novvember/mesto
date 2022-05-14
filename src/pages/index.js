@@ -129,33 +129,48 @@ const cardsSection = new Section({
 
 // Попапы
 const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
-  return api.setUserInfo(data)
+  profileEditPopup.blockSubmitButton();
+
+  api.setUserInfo(data)
     .then(res => {
       userInfo.fill(res);
       userInfo.renderName();
       userInfo.renderJob();
       profileEditPopup.close();
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
+    .finally(() => {
+      profileEditPopup.unblockSubmitButton();
+    });
 }, handleDisableSubmitButton);
 
 const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
-  return api.changeAvatar(data.link)
+  avatarChangePopup.blockSubmitButton();
+
+  api.changeAvatar(data.link)
     .then((res) => {
       userInfo.fill(res);
       userInfo.renderAvatar();
       avatarChangePopup.close();
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
+    .finally(() => {
+      avatarChangePopup.unblockSubmitButton();
+    });
 }, handleDisableSubmitButton);
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
-  return api.addNewCard(data)
+  newCardPopup.blockSubmitButton();
+
+  api.addNewCard(data)
     .then(res => {
       cardsSection.addItem(renderCard(res), true);
       newCardPopup.close();
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
+    .finally(() => {
+      newCardPopup.unblockSubmitButton();
+    });
 }, handleDisableSubmitButton);
 
 const imagePopup = new PopupWithImage(imagePopupSelector);

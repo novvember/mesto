@@ -19,6 +19,7 @@ export default class PopupWithForm extends Popup {
     this.formName = this._form.getAttribute('name');
     this._allInputs = this._form.querySelectorAll('.popup__input');
     this._submitButton = this._form.querySelector('.popup__save-button');
+    this._originalButtonText = this._submitButton.textContent;
   }
 
   /**
@@ -45,19 +46,28 @@ export default class PopupWithForm extends Popup {
   }
 
   /**
-   * Выполняет действия при сабмите формы и вызывает колбек
+   * Выполняет необхоимые действия при сабмите формы
    */
   _submit() {
-    const tempText = 'Сохранение...';
-    const originalText = this._submitButton.textContent;
+    this._handleSubmit(this._getInputValues());
+  }
 
+  /**
+   * Блокирует кнопку отправки во время выполнения запроса
+   * @param {string} blockedButtonText - Текст, отображаемый на кнопке
+   */
+  blockSubmitButton(blockedButtonText = 'Сохранение...') {
+    this._blockedButtonText = blockedButtonText;
     this._submitButton.disabled = true;
-    this._submitButton.textContent = tempText;
-    this._handleSubmit(this._getInputValues())
-      .then(() => {
-        this._submitButton.textContent = originalText;
-        this._submitButton.disabled = false;
-      });
+    this._submitButton.textContent = this._blockedButtonText;
+  }
+
+  /**
+   * Возвращает состояние кнопки отправки после блокировки
+   */
+  unblockSubmitButton() {
+    this._submitButton.disabled = false;
+    this._submitButton.textContent = this._originalButtonText;
   }
 
   /**
