@@ -87,6 +87,12 @@ export default class FormValidator {
     errorElement.textContent = '';
   }
 
+  hideErrors() {
+    this._inputElements.forEach(input => {
+      this._hideInputError (input);
+    });
+  }
+
   /**
    * Переключает состояние кнопки сабмита формы
    */

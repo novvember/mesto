@@ -110,9 +110,10 @@ function handleLikeCard(cardId, isLiked) {
 }
 
 /**
- * Выключает кнопку сабмита при вызове из экземпляра попапа с формой
+ * Выполняет сброс формы при открытии попапа с формой
  */
-function handleDisableSubmitButton () {
+function handleOpenForm() {
+  formValidators[this.formName].hideErrors();
   formValidators[this.formName].disableButtonState();
 }
 
@@ -145,7 +146,7 @@ const profileEditPopup = new PopupWithForm(profileEditPopupSelector, data => {
     .finally(() => {
       profileEditPopup.unblockSubmitButton();
     });
-}, handleDisableSubmitButton);
+}, handleOpenForm);
 
 const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
   avatarChangePopup.blockSubmitButton();
@@ -160,7 +161,7 @@ const avatarChangePopup = new PopupWithForm(avatarChangePopupSelector, data => {
     .finally(() => {
       avatarChangePopup.unblockSubmitButton();
     });
-}, handleDisableSubmitButton);
+}, handleOpenForm);
 
 const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
   newCardPopup.blockSubmitButton();
@@ -174,7 +175,7 @@ const newCardPopup = new PopupWithForm(newCardPopupSelector, data => {
     .finally(() => {
       newCardPopup.unblockSubmitButton();
     });
-}, handleDisableSubmitButton);
+}, handleOpenForm);
 
 const imagePopup = new PopupWithImage(imagePopupSelector);
 
