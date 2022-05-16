@@ -25,7 +25,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -49,7 +52,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -70,7 +76,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -87,7 +96,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -111,7 +123,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -129,7 +144,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return Promise.resolve();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     });
   }
 
@@ -147,7 +165,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     })
     .then(res => {
       return res.likes;
@@ -168,7 +189,10 @@ export default class Api {
     })
     .then(res => {
       if (res.ok) return res.json();
-      throw new Error(`${res.status} ${res.statusText}. See response.message for more info`);
+      return res.json()
+      .then(res => {
+        throw new Error(res.message);
+      });
     })
     .then(res => {
       return res.likes;
