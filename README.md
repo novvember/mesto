@@ -38,5 +38,5 @@
 [novvember.github.io/mesto](https://novvember.github.io/mesto/)
 
 ## Статус разработки
-Проект перенесен на React в отдельном репозитории: [github.com/novvember/mesto-react](https://github.com/novvember/mesto-react)
+Проект перенесен на React в отдельном репозитории: [github.com/novvember/mesto-react](https://github.com/novvember/mesto-react)  
 Дальнейшая разработка и добавление функциональности будет проводиться там.
