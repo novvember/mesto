@@ -2,6 +2,14 @@
 Сервис Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 Выполнен в рамках серии проектных работ в Яндекс.Практикуме по профессии «Веб-разработчик» (от начала изучения JavaScript, спринт 4, и далее).
 
+Это часть работы над проектом Mesto:
+
+1. Mesto ⬅ *этот репозиторий*
+2. [Mesto (версия на React)](https://github.com/novvember/mesto-react)
+3. [Mesto (версия на авторизацией и регистрацией)](https://github.com/novvember/react-mesto-auth)
+4. [Mesto (версия для сервера)](https://github.com/novvember/express-mesto-gha)
+5. [Mesto (версия с фронтендом и бэкендом)](https://github.com/novvember/react-mesto-api-full)
+
 ## Исходные данные
 * [Макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 * Брифы по проекту
@@ -38,5 +46,6 @@
 [novvember.github.io/mesto](https://novvember.github.io/mesto/)
 
 ## Статус разработки
-Проект перенесен на React в отдельном репозитории: [github.com/novvember/mesto-react](https://github.com/novvember/mesto-react)  
-Дальнейшая разработка и добавление функциональности будет проводиться там.
+✅ *Завершено*
+
+Дальнейшая разработка ведется в репозитории [Mesto (версия на React)](https://github.com/novvember/mesto-react)
